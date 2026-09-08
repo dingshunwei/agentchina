@@ -119,7 +119,7 @@
   /* 环形 */
   .orbit{position:relative;width:min(560px,88vw);aspect-ratio:1/1;}
 
-  .hint{text-align:center;font-size:15px;font-weight:700;color:#a0432a;margin:8px 0 4px;}
+  .hint{position:absolute;text-align:center;font-size:14px;font-weight:700;color:#a0432a;z-index:6;white-space:nowrap;}
   .center{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     width:30%;aspect-ratio:1/1;border-radius:50%;
@@ -290,9 +290,8 @@
       <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
     </header>
 
-    <div class="hint" id="hint">👆 点飞机或轮船，向我询价</div>
-
     <div class="orbit" id="orbit">
+      <div class="hint" id="hint">👆 点飞机或轮船，向我询价</div>
       <div class="center">
         <div class="emoji">🐰</div>
         <div class="name">中国</div>
@@ -371,6 +370,8 @@
     // 轮船：放中国↔卡塔尔 连线中点，船头朝卡塔尔（船尾朝中国）
     const sAng=Math.atan2(qa.y-cn.y, qa.x-cn.x)*180/Math.PI - 180; // 🚢默认朝左，补偿
     place(shipEl, (cn.x+qa.x)/2, (cn.y+qa.y)/2, sAng);
+    // 提示文字放在美国(USA)头像上方
+    const hintEl=document.getElementById('hint'); if(hintEl){ hintEl.style.left=(us.x/100*orbit.clientWidth - hintEl.offsetWidth/2)+'px'; hintEl.style.top=((us.y-10)/100*orbit.clientHeight)+'px'; }
     requestAnimationFrame(positionTransports);
   }
   requestAnimationFrame(positionTransports);
