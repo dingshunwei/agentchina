@@ -288,6 +288,29 @@
   document.getElementById('mCancel').addEventListener('click',()=>modal.classList.remove('show'));
   document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('show'));
   modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('show'); });
+  // 询盘提交 -> 存储到 Supabase messages 表（作者 App 可接收）
+  const SUPABASE_URL='https://elrsrrvvuhfbkmxnvtod.supabase.co';
+  const SUPABASE_ANON='sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
+  async function postLead(rec){
+    try{
+      const resp=await fetch(SUPABASE_URL+'/rest/v1/messages',{
+        method:'POST',
+        headers:{
+          'apikey':SUPABASE_ANON,
+          'Authorization':'Bearer '+SUPABASE_ANON,
+          'Content-Type':'application/json',
+          'Prefer':'return=minimal'
+        },
+        body:JSON.stringify({
+          device_id:'website:'+rec.mode,
+          text:(rec.mode==='ship'?'[出口詢盤] ':'[進口詢盤] ')+rec.text,
+          created_at:rec.time,
+          is_read:false
+        })
+      });
+      return resp.ok;
+    }catch(e){ return false; }
+  }
   document.getElementById('mSend').addEventListener('click',()=>{
     const t=mText.value.trim();
     if(!t){ mText.focus(); return; }
@@ -295,6 +318,8 @@
     const rec={mode,time:new Date().toISOString(),text:t};
     const list=JSON.parse(localStorage.getItem('trade_leads')||'[]');
     list.push(rec); localStorage.setItem('trade_leads',JSON.stringify(list));
+    // 同步提交到后端（作者 App 可接收）
+    postLead(rec);
     mThanksText.textContent='「'+t+'」 已记录，我们会尽快联系你';
     mForm.style.display='none'; mThanks.style.display='block';
   });
