@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界贸易 · 可爱动物环 · 中国兔兔</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@400;600;700&display=swap');
+
+  :root{
+    --cream:#fff6ec;
+    --coral:#ff8b7a;
+    --red:#e8503a;
+    --ink:#5b4636;
+    --ink-soft:#8a7466;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:'Baloo 2','Fredoka',sans-serif;
+    color:var(--ink);
+    overflow:hidden; /* 禁止滚动 */
+    background:
+      radial-gradient(circle at 15% 15%, #ffd9c4 0%, transparent 40%),
+      radial-gradient(circle at 85% 18%, #c8e9fb 0%, transparent 42%),
+      radial-gradient(circle at 50% 95%, #cdeed6 0%, transparent 50%),
+      var(--cream);
+  }
+
+  /* 真正的蓬松云 */
+  .cloud{
+    position:fixed;z-index:0;opacity:.85;animation:floatCloud linear infinite;
+  }
+  .cloud::before,.cloud::after{
+    content:'';position:absolute;background:#fff;border-radius:50%;
+  }
+  .cloud{
+    width:150px;height:52px;border-radius:999px;background:#fff;
+  }
+  .cloud::before{width:80px;height:56px;top:-26px;left:22px;}
+  .cloud::after{width:60px;height:44px;top:-18px;right:26px;}
+  @keyframes floatCloud{0%{transform:translateX(-14px)}50%{transform:translateX(14px)}100%{transform:translateX(-14px)}}
+
+  .stage{
+    height:100%;display:flex;flex-direction:row;align-items:center;justify-content:center;
+    gap:clamp(10px,3vw,40px);padding:16px;position:relative;z-index:1;
+  }
+  .side{flex:0 0 auto;max-width:200px;text-align:center;color:#5b4636;}
+  .side-left{text-align:right;}
+  .side-left h1{font-size:clamp(20px,2.6vw,34px);}
+  .side-left .eyebrow{font-size:11px;}
+  .side-right{font-size:clamp(16px,2vw,22px);font-weight:700;color:#e8503a;}
+  .side-right .hand{font-size:26px;}
+  .side-sub{display:block;font-size:12px;color:#8a7466;margin-top:6px;font-weight:400;}
+
+  /* 标题 - 紧凑 */
+  header{text-align:center;margin-bottom:14px;}
+  .eyebrow{
+    display:inline-block;background:var(--coral);color:#fff;padding:6px 18px;
+    border-radius:999px;font-weight:700;font-size:13px;letter-spacing:1px;
+    box-shadow:0 3px 0 rgba(0,0,0,.07);margin-bottom:10px;
+  }
+  h1{font-size:clamp(26px,4.5vw,44px);font-weight:800;line-height:1.15;}
+  h1 .t{display:inline-block;animation:hop 1.6s ease-in-out infinite;}
+  @keyframes hop{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+
+  /* 环形 */
+  .orbit{position:relative;width:min(560px,88vw);aspect-ratio:1/1;}
+
+  .center{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:30%;aspect-ratio:1/1;border-radius:50%;
+    background:linear-gradient(160deg,#fff,#ffe0cf);
+    border:5px solid var(--coral);
+    box-shadow:0 16px 44px rgba(200,90,40,.22);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;z-index:5;
+  }
+  .center .emoji{font-size:clamp(44px,8vw,72px);line-height:1;animation:breath 2.4s ease-in-out infinite;}
+  @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .center .name{font-weight:800;color:var(--red);font-size:clamp(14px,2.2vw,19px);margin-top:3px;}
+  .center .tag{
+    background:var(--red);color:#fff;font-size:10px;font-weight:800;
+    padding:4px 12px;border-radius:999px;margin-top:6px;
+  }
+
+  .animal{
+    position:absolute;width:16%;aspect-ratio:1/1;border-radius:50%;
+    background:rgba(255,255,255,.94);
+    box-shadow:0 10px 26px rgba(120,80,40,.14);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;border:3px solid #fff;z-index:2;
+    opacity:0;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) forwards;
+  }
+  @keyframes pop{to{opacity:1}}
+  .animal:hover{transform:scale(1.12) rotate(-4deg);z-index:6;}
+  .animal .emoji{font-size:clamp(26px,5vw,42px);}
+  .animal .nm{font-weight:800;font-size:clamp(10px,1.6vw,12px);margin-top:1px;}
+
+  footer{position:absolute;bottom:18px;text-align:center;color:var(--ink-soft);font-size:14px;width:100%;}
+  .hand{font-size:22px;display:inline-block;animation:wig 2s ease-in-out infinite;}
+  @keyframes wig{0%,100%{transform:rotate(0)}25%{transform:rotate(14deg)}75%{transform:rotate(-8deg)}}
+
+  /* 运输元素：轮船(出口) + 飞机(进口) */
+  .transport{position:absolute;inset:0;z-index:3;pointer-events:none;}
+  .ship{position:absolute;top:0;left:0;font-size:clamp(46px,6.4vw,68px);
+    transform:rotate(0deg);
+    animation:sail 5s ease-in-out infinite;
+    filter:drop-shadow(0 5px 8px rgba(0,0,0,.18));z-index:6;
+  }
+  .ship .label{font-size:11px;font-weight:800;color:#2b6cb0;background:#fff;
+    padding:2px 7px;border-radius:6px;position:absolute;bottom:-26px;right:-6px;white-space:nowrap;
+    box-shadow:0 2px 5px rgba(0,0,0,.12);}
+  @keyframes sail{
+    0%{transform:translate(0,0);opacity:.8}
+    50%{transform:translate(12px,6px);opacity:1}
+    100%{transform:translate(0,0);opacity:.8}
+  }
+  .plane{position:absolute;top:0;left:0;font-size:clamp(42px,5.8vw,62px);
+    transform:rotate(135deg);
+    /* placeholder */
+    animation:fly 5.5s ease-in-out infinite;
+    filter:drop-shadow(0 5px 8px rgba(0,0,0,.18));z-index:6;
+  }
+  .plane .label{font-size:11px;font-weight:800;color:#a0432a;background:#fff;
+    padding:2px 7px;border-radius:6px;position:absolute;bottom:-26px;right:-4px;white-space:nowrap;transform:rotate(-135deg);transform-origin:center;
+    box-shadow:0 2px 5px rgba(0,0,0,.12);}
+  @keyframes fly{
+    0%{transform:translate(0,0) rotate(135deg);opacity:.8}
+    45%{transform:translate(0,20px) rotate(135deg);opacity:1}
+    100%{transform:translate(0,0) rotate(135deg);opacity:.8}
+  }
+  
+  .langsel{position:absolute;top:14px;left:50%;transform:translateX(-50%);padding:6px 12px;border-radius:999px;border:2px solid #ffd9c4;font-family:inherit;font-size:13px;color:#5b4636;background:#fff;cursor:pointer;z-index:20;}
+  /* 轮船/飞机 可点击 */
+  .ship,.plane{cursor:pointer;transition:transform .2s;}
+  .ship:hover,.plane:hover{transform:scale(1.12);}
+
+  /* 弹窗 */
+  .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:99;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);}
+  .modal.show{display:flex;}
+  .modal-box{
+    width:min(360px,90vw);background:#fff;border-radius:24px;padding:26px 22px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center;
+    animation:pop .35s cubic-bezier(.2,.9,.3,1.4);
+  }
+  .modal-emoji{font-size:54px;line-height:1;margin-bottom:8px;}
+  .modal-title{font-size:20px;font-weight:800;color:#5b4636;margin-bottom:4px;}
+  .modal-sub{font-size:13px;color:#8a7466;margin-bottom:14px;}
+  .modal textarea{
+    width:100%;border:2px solid #ffe0cf;border-radius:14px;padding:12px;
+    font-size:15px;font-family:inherit;color:#5b4636;resize:vertical;outline:none;
+    min-height:90px;
+  }
+  .modal textarea:focus{border-color:#ff8b7a;}
+  .modal-btns{display:flex;gap:10px;margin-top:14px;}
+  .modal-btn{flex:1;padding:12px;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;}
+  .modal-cancel{background:#f0e8dd;color:#8a7466;}
+  .modal-send{background:#ff8b7a;color:#fff;}
+  .modal-send:hover{background:#e8503a;}
+  .modal-thanks{display:none;}
+
+</style>
+</head>
+<body>
+  <div class="cloud" style="width:150px;height:52px;top:8%;left:5%;animation-duration:9s"></div>
+  <div class="cloud" style="width:190px;height:60px;top:16%;right:6%;animation-duration:12s"></div>
+  <div class="cloud" style="width:120px;height:44px;bottom:10%;left:10%;animation-duration:10s"></div>
+  <div class="cloud" style="width:140px;height:48px;bottom:8%;right:12%;animation-duration:11s"></div>
+
+  <div class="stage">
+    <header class="side side-left">
+      <div class="eyebrow">🌏 GLOBAL FRIENDS</div>
+      <select id="langSel" class="langsel"><option value="zh">中文</option><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option><option value="ru">Русский</option><option value="ar">العربية</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="hi">हिन्दी</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="tr">Türkçe</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option><option value="id">Bahasa Indonesia</option><option value="sv">Svenska</option><option value="uk">Українська</option></select>
+      <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
+    </header>
+
+    <div class="orbit" id="orbit">
+      <div class="center">
+        <div class="emoji">🐰</div>
+        <div class="name">中国</div>
+        <div class="tag">⭐ 世界贸易中心</div>
+      </div>
+      <div class="ship">🚢<span class="label">← 出口 Export</span></div>
+      <div class="plane">✈️<span class="label">进口 Import</span></div>
+    </div>
+
+        <div class="modal" id="tradeModal">
+      <div class="modal-box">
+        <div class="modal-emoji" id="mEmoji">🚢</div>
+        <div class="modal-title" id="mTitle">从中国买东西</div>
+        <div class="modal-sub" id="mSub">告诉我你想从中国采购什么吧</div>
+        <div id="mForm">
+          <textarea id="mText" placeholder="例如：想采购一批手机配件 / 汽车零件…写在这里"></textarea>
+          <div class="modal-btns">
+            <button class="modal-btn modal-cancel" id="mCancel">取消</button>
+            <button class="modal-btn modal-send" id="mSend">发送 💬</button>
+          </div>
+        </div>
+        <div class="modal-thanks" id="mThanks">
+          <div class="modal-emoji">🎉</div>
+          <div class="modal-title">已收到你的需求！</div>
+          <div class="modal-sub" id="mThanksText">我们会尽快联系你</div>
+          <button class="modal-btn modal-cancel" id="mClose">关闭</button>
+        </div>
+      </div>
+    </div>
+
+  <aside class="side side-right"><span class="hand">🤝</span><br><strong>贸易让世界更友好</strong><br><span class="side-sub">和世界做朋友</span></aside>
+  </div>
+
+<script>
+  const animals=[
+    {e:'🦅',n:'美国'},{e:'🐂',n:'瑞士'},{e:'🐓',n:'法国'},{e:'🐻',n:'德国'},
+    {e:'🦁',n:'英国'},{e:'🦘',n:'澳大利亚'},{e:'🐯',n:'韩国'},{e:'🐻‍❄️',n:'俄罗斯'},
+    {e:'🐨',n:'新西兰'},{e:'🌸',n:'日本'},{e:'🐆',n:'卡塔尔'},{e:'🐪',n:'阿联酋 · 迪拜'},{e:'🐫',n:'沙特阿拉伯'}
+  ];
+  const orbit=document.getElementById('orbit');
+  const r=40,count=animals.length;
+  const shipEl=document.querySelector('.ship');
+  const planeEl=document.querySelector('.plane');
+  animals.forEach((a,i)=>{
+    const angle=(360/count)*i-90;
+    const x=50+r*Math.cos(angle*Math.PI/180);
+    const y=50+r*Math.sin(angle*Math.PI/180);
+    const div=document.createElement('div');
+    div.className='animal';
+    div.style.left=x+'%';div.style.top=y+'%';
+    div.style.transform='translate(-50%,-50%)';
+    div.style.animationDelay=(0.08+i*0.05)+'s';
+    div.setAttribute('data-name',a.n);
+    div.innerHTML=`<span class="emoji">${a.e}</span><div class="nm">${a.n}</div>`;
+    orbit.appendChild(div);
+  });
+
+  // === 动态跟随：让轮船船头对准卡塔尔圈边缘、飞机机尾对准美国圈边缘 ===
+  function positionTransports(){
+    const orb=orbit.getBoundingClientRect();
+    function center(name){
+      const el=[...orbit.querySelectorAll('.animal')].find(a=>a.getAttribute('data-name')===name);
+      if(!el) return null;
+      const b=el.getBoundingClientRect();
+      return {cx:b.x+b.width/2-orb.x, cy:b.y+b.height/2-orb.y, right:b.x+b.width-orb.x, bottom:b.y+b.height-orb.y, left:b.x-orb.x};
+    }
+    const america=center('美国');
+    const qatar=center('卡塔尔');
+    if(!america||!qatar) return;
+    // 飞机：机尾(顶部)贴美国圈下边缘，且水平对齐美国圈中心
+    const pw=planeEl.offsetWidth || planeEl.getBoundingClientRect().width;  // 用未变换宽度避免旋转干扰
+    const planeTop=america.bottom;           // 机尾贴美国圈下沿
+    const planeLeft=america.cx - pw/2;       // 水平对齐美国圆心
+    planeEl.style.left=planeLeft+'px';
+    planeEl.style.top=planeTop+'px';
+    // 轮船：船头尖(左缘)对准卡塔尔圈右缘，垂直方向与卡塔尔圈中心对齐
+    const sb=shipEl.getBoundingClientRect();
+    const sw=sb.width, sh2=sb.height;
+    const shipLeft=qatar.right;               // 船头尖贴卡塔尔圈右边缘
+    const shipTop=qatar.cy - sh2/2;           // 船垂直对齐卡塔尔中心
+    shipEl.style.left=shipLeft+'px';
+    shipEl.style.top=shipTop+'px';
+    requestAnimationFrame(positionTransports);
+  }
+  requestAnimationFrame(positionTransports);
+
+  // 轮船/飞机 点击 -> 弹窗询盘
+  const modal=document.getElementById('tradeModal');
+  const mEmoji=document.getElementById('mEmoji');
+  const mTitle=document.getElementById('mTitle');
+  const mSub=document.getElementById('mSub');
+  const mText=document.getElementById('mText');
+  const mForm=document.getElementById('mForm');
+  const mThanks=document.getElementById('mThanks');
+  const mThanksText=document.getElementById('mThanksText');
+  let mode='';
+  function openModal(kind){
+    mode=kind;
+    const m=I18N[lang].modal[kind];
+    mEmoji.textContent = kind==='ship' ? '🚢' : '✈️';
+    mTitle.textContent = m.t;
+    mSub.textContent = m.s;
+    mText.placeholder = m.ph;
+    mForm.style.display='block'; mThanks.style.display='none'; mText.value='';
+    modal.classList.add('show');
+  }
+  document.querySelector('.ship').addEventListener('click',()=>openModal('ship'));
+  document.querySelector('.plane').addEventListener('click',()=>openModal('plane'));
+  document.getElementById('mCancel').addEventListener('click',()=>modal.classList.remove('show'));
+  document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('show'));
+  modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('show'); });
+  document.getElementById('mSend').addEventListener('click',()=>{
+    const t=mText.value.trim();
+    if(!t){ mText.focus(); return; }
+    // 保存询盘到 localStorage
+    const rec={mode,time:new Date().toISOString(),text:t};
+    const list=JSON.parse(localStorage.getItem('trade_leads')||'[]');
+    list.push(rec); localStorage.setItem('trade_leads',JSON.stringify(list));
+    mThanksText.textContent='「'+t+'」 已记录，我们会尽快联系你';
+    mForm.style.display='none'; mThanks.style.display='block';
+  });
+
+
+  // ===== 国际化 =====
+  const I18N={"zh": {"title": "和世界做朋友，<br><span class=\"t\">🐰</span> 从中国兔兔开始", "slogan": "贸易让世界更友好", "sideSub": "和世界做朋友", "shipLabel": "← 出口 Export", "planeLabel": "进口 Import", "modal": {"ship": {"t": "从中国买东西", "s": "你从中国进口（出口需求）— 想采购什么？", "ph": "例如：想采购一批手机配件 / 汽车零件…写在这里"}, "plane": {"t": "卖东西给中国", "s": "你想卖给中国（进口需求）— 有什么产品？", "ph": "例如：我有农产品/电子产品想卖到中国…写在这里"}, "send": "发送 💬", "cancel": "取消", "close": "关闭", "thanks": "已收到你的需求！", "thanksSub": "我们会尽快联系你"}, "countries": ["美国", "瑞士", "法国", "德国", "英国", "澳大利亚", "韩国", "俄罗斯", "新西兰", "日本", "卡塔尔", "阿联酋 · 迪拜", "沙特阿拉伯"]}, "en": {"title": "Make friends with the world,<br><span class=\"t\">🐰</span> starting from China", "slogan": "Trade brings the world closer", "sideSub": "And friends together", "shipLabel": "← Export", "planeLabel": "Import", "modal": {"ship": {"t": "Buy from China", "s": "You import from China (export demand) — what do you need?", "ph": "e.g. want to buy phone accessories / auto parts…"}, "plane": {"t": "Sell to China", "s": "You want to sell to China (import demand) — what product?", "ph": "e.g. I have farm goods / electronics to sell to China…"}, "send": "Send 💬", "cancel": "Cancel", "close": "Close", "thanks": "Got your inquiry!", "thanksSub": "We will contact you soon"}, "countries": ["USA", "Switzerland", "France", "Germany", "UK", "Australia", "South Korea", "Russia", "New Zealand", "Japan", "Qatar", "UAE · Dubai", "Saudi Arabia"]}, "fr": {"title": "Faire des amis dans le monde,<br><span class=\"t\">🐰</span> en commençant par la Chine", "slogan": "Le commerce rapproche le monde", "sideSub": "Et des amis ensemble", "shipLabel": "← Export", "planeLabel": "Import", "modal": {"ship": {"t": "Acheter en Chine", "s": "Vous importez de Chine (demande export) — que cherchez-vous ?", "ph": "ex. acheter des accessoires téléphone / pièces auto…"}, "plane": {"t": "Vendre en Chine", "s": "Vous voulez vendre en Chine (demande import) — quel produit ?", "ph": "ex. produits agricoles / électroniques à vendre en Chine…"}, "send": "Envoyer 💬", "cancel": "Annuler", "close": "Fermer", "thanks": "Demande reçue !", "thanksSub": "Nous vous contacterons bientôt"}, "countries": ["États-Unis", "Suisse", "France", "Allemagne", "Royaume-Uni", "Australie", "Corée du Sud", "Russie", "Nouvelle-Zélande", "Japon", "Qatar", "Émirats · Dubaï", "Arabie saoudite"]}, "de": {"title": "Mit der Welt Freundschaft schließen,<br><span class=\"t\">🐰</span> angefangen bei China", "slogan": "Handel bringt die Welt näher", "sideSub": "Und Freunde zusammen", "shipLabel": "← Export", "planeLabel": "Import", "modal": {"ship": {"t": "In China kaufen", "s": "Sie importieren aus China (Exportnachfrage) — was brauchen Sie?", "ph": "z.B. Handyzubehör / Autoteile kaufen…"}, "plane": {"t": "Nach China verkaufen", "s": "Sie wollen nach China verkaufen (Importnachfrage) — welches Produkt?", "ph": "z.B. Agrar- / Elektroprodukte nach China verkaufen…"}, "send": "Senden 💬", "cancel": "Abbrechen", "close": "Schließen", "thanks": "Anfrage erhalten!", "thanksSub": "Wir melden uns bald"}, "countries": ["USA", "Schweiz", "Frankreich", "Deutschland", "Großbritannien", "Australien", "Südkorea", "Russland", "Neuseeland", "Japan", "Katar", "VAE · Dubai", "Saudi-Arabien"]}, "es": {"title": "Haz amigos en el mundo,<br><span class=\"t\">🐰</span> empezando por China", "slogan": "El comercio acerca al mundo", "sideSub": "Y amigos juntos", "shipLabel": "← Exportación", "planeLabel": "Importación", "modal": {"ship": {"t": "Comprar en China", "s": "Importas de China (demanda export) — ¿qué necesitas?", "ph": "ej. comprar accesorios de móvil / piezas de auto…"}, "plane": {"t": "Vender a China", "s": "Quieres vender a China (demanda import) — ¿qué producto?", "ph": "ej. productos agrícolas / electrónicos para vender a China…"}, "send": "Enviar 💬", "cancel": "Cancelar", "close": "Cerrar", "thanks": "¡Solicitud recibida!", "thanksSub": "Te contactaremos pronto"}, "countries": ["EE. UU.", "Suiza", "Francia", "Alemania", "Reino Unido", "Australia", "Corea del Sur", "Rusia", "Nueva Zelanda", "Japón", "Catar", "EAU · Dubái", "Arabia Saudita"]}, "it": {"title": "Fai amicizia nel mondo,<br><span class=\"t\">🐰</span> partendo dalla Cina", "slogan": "Il commercio avvicina il mondo", "sideSub": "E amici insieme", "shipLabel": "← Esportazione", "planeLabel": "Importazione", "modal": {"ship": {"t": "Comprare in Cina", "s": "Importi dalla Cina (domanda export) — di cosa hai bisogno?", "ph": "es. comprare accessori per telefoni / pezzi auto…"}, "plane": {"t": "Vendere in Cina", "s": "Vuoi vendere in Cina (domanda import) — quale prodotto?", "ph": "es. prodotti agricoli / elettronici da vendere in Cina…"}, "send": "Invia 💬", "cancel": "Annulla", "close": "Chiudi", "thanks": "Richiesta ricevuta!", "thanksSub": "Ti contatteremo presto"}, "countries": ["USA", "Svizzera", "Francia", "Germania", "Regno Unito", "Australia", "Corea del Sud", "Russia", "Nuova Zelanda", "Giappone", "Qatar", "EAU · Dubai", "Arabia Saudita"]}, "pt": {"title": "Faça amigos no mundo,<br><span class=\"t\">🐰</span> começando pela China", "slogan": "O comércio aproxima o mundo", "sideSub": "E amigos juntos", "shipLabel": "← Exportação", "planeLabel": "Importação", "modal": {"ship": {"t": "Comprar na China", "s": "Você importa da China (demanda export) — o que precisa?", "ph": "ex. comprar acessórios de celular / peças de carro…"}, "plane": {"t": "Vender para a China", "s": "Você quer vender para a China (demanda import) — qual produto?", "ph": "ex. produtos agrícolas / eletrônicos para vender à China…"}, "send": "Enviar 💬", "cancel": "Cancelar", "close": "Fechar", "thanks": "Pedido recebido!", "thanksSub": "Falaremos com você em breve"}, "countries": ["EUA", "Suíça", "França", "Alemanha", "Reino Unido", "Austrália", "Coreia do Sul", "Rússia", "Nova Zelândia", "Japão", "Catar", "EAU · Dubai", "Arábia Saudita"]}, "ru": {"title": "Дружи со всем миром,<br><span class=\"t\">🐰</span> начиная с Китая", "slogan": "Торговля сближает мир", "sideSub": "И друзей вместе", "shipLabel": "← Экспорт", "planeLabel": "Импорт", "modal": {"ship": {"t": "Купить в Китае", "s": "Вы импортируете из Китая (экспортный спрос) — что вам нужно?", "ph": "например, купить аксессуары для телефонов / автозапчасти…"}, "plane": {"t": "Продать в Китай", "s": "Вы хотите продать в Китай (импортный спрос) — какой товар?", "ph": "например, сельхозпродукция / электроника для продажи в Китай…"}, "send": "Отправить 💬", "cancel": "Отмена", "close": "Закрыть", "thanks": "Запрос получен!", "thanksSub": "Мы скоро свяжемся с вами"}, "countries": ["США", "Швейцария", "Франция", "Германия", "Великобритания", "Австралия", "Южная Корея", "Россия", "Новая Зеландия", "Япония", "Катар", "ОАЭ · Дубай", "Саудовская Аравия"]}, "ar": {"title": "كوّن صداقات مع العالم،<br><span class=\"t\">🐰</span> بدءاً من الصين", "slogan": "التجارة تقرّب العالم", "sideSub": "وأصدقاء معاً", "shipLabel": "← تصدير", "planeLabel": "استيراد", "modal": {"ship": {"t": "الشراء من الصين", "s": "تستورد من الصين (طلب تصدير) — ماذا تحتاج؟", "ph": "مثال: شراء إكسسوارات هواتف / قطع سيارات…"}, "plane": {"t": "البيع إلى الصين", "s": "تريد البيع إلى الصين (طلب استيراد) — أي منتج؟", "ph": "مثال: منتجات زراعية / إلكترونيات للبيع إلى الصين…"}, "send": "إرسال 💬", "cancel": "إلغاء", "close": "إغلاق", "thanks": "تم استلام طلبك!", "thanksSub": "سنتواصل معك قريباً"}, "countries": ["أمريكا", "سويسرا", "فرنسا", "ألمانيا", "بريطانيا", "أستراليا", "كوريا الجنوبية", "روسيا", "نيوزيلندا", "اليابان", "قطر", "الإمارات · دبي", "السعودية"]}, "ja": {"title": "世界と友達になろう、<br><span class=\"t\">🐰</span> 中国から始まる", "slogan": "貿易が世界をつなぐ", "sideSub": "そして友達と一緒に", "shipLabel": "← 輸出", "planeLabel": "輸入", "modal": {"ship": {"t": "中国から買う", "s": "中国から輸入（輸出需要）— 何が必要ですか？", "ph": "例：スマホアクセサリー / 自動車部品を買いたい…"}, "plane": {"t": "中国に売る", "s": "中国に売りたい（輸入需要）— どんな商品？", "ph": "例：農産品 / 電子製品を中国に売りたい…"}, "send": "送信 💬", "cancel": "キャンセル", "close": "閉じる", "thanks": "お問い合わせを受け付けました！", "thanksSub": "すぐにご連絡します"}, "countries": ["アメリカ", "スイス", "フランス", "ドイツ", "イギリス", "オーストラリア", "韓国", "ロシア", "ニュージーランド", "日本", "カタール", "UAE · ドバイ", "サウジアラビア"]}, "ko": {"title": "세계와 친구가 되세요,<br><span class=\"t\">🐰</span> 중국에서 시작", "slogan": "무역이 세상을 가깝게", "sideSub": "그리고 친구와 함께", "shipLabel": "← 수출", "planeLabel": "수입", "modal": {"ship": {"t": "중국에서 사기", "s": "중국에서 수입(수출 수요) — 무엇이 필요하세요?", "ph": "예: 휴대폰 액세서리 / 자동차 부품 구매…"}, "plane": {"t": "중국에 팔기", "s": "중국에 팔고 싶다(수입 수요) — 어떤 상품?", "ph": "예: 농산물 / 전자제품을 중국에 팔고 싶다…"}, "send": "보내기 💬", "cancel": "취소", "close": "닫기", "thanks": "문의를 접수했습니다!", "thanksSub": "곧 연락드리겠습니다"}, "countries": ["미국", "스위스", "프랑스", "독일", "영국", "호주", "한국", "러시아", "뉴질랜드", "일본", "카타르", "UAE · 두바이", "사우디아라비아"]}, "hi": {"title": "दुनिया से दोस्ती करें,<br><span class=\"t\">🐰</span> चीन से शुरू", "slogan": "व्यापार दुनिया को करीब लाता है", "sideSub": "और दोस्त साथ में", "shipLabel": "← निर्यात", "planeLabel": "आयात", "modal": {"ship": {"t": "चीन से खरीदें", "s": "आप चीन से आयात करते हैं (निर्यात मांग) — आपको क्या चाहिए?", "ph": "उदा. फोन एक्सेसरी / ऑटो पार्ट्स खरीदना…"}, "plane": {"t": "चीन को बेचें", "s": "आप चीन को बेचना चाहते हैं (आयात मांग) — कौन सा उत्पाद?", "ph": "उदा. कृषि उत्पाद / इलेक्ट्रॉनिक्स चीन को बेचना…"}, "send": "भेजें 💬", "cancel": "रद्द करें", "close": "बंद करें", "thanks": "आपका अनुरोध मिल गया!", "thanksSub": "हम जल्द संपर्क करेंगे"}, "countries": ["अमेरिका", "स्विट्जरलैंड", "फ्रांस", "जर्मनी", "ब्रिटेन", "ऑस्ट्रेलिया", "दक्षिण कोरिया", "रूस", "न्यूजीलैंड", "जापान", "कतर", "यूएई · दुबई", "सऊदी अरब"]}, "nl": {"title": "Maak vrienden met de wereld,<br><span class=\"t\">🐰</span> beginnend bij China", "slogan": "Handel brengt de wereld dichterbij", "sideSub": "En vrienden samen", "shipLabel": "← Export", "planeLabel": "Import", "modal": {"ship": {"t": "Kopen uit China", "s": "U importeert uit China (exportvraag) — wat heeft u nodig?", "ph": "bijv. telefoonaccessoires / auto-onderdelen kopen…"}, "plane": {"t": "Verkopen aan China", "s": "U wilt verkopen aan China (importvraag) — welk product?", "ph": "bijv. landbouwproducten / elektronica verkopen aan China…"}, "send": "Versturen 💬", "cancel": "Annuleren", "close": "Sluiten", "thanks": "Verzoek ontvangen!", "thanksSub": "Wij nemen snel contact op"}, "countries": ["VS", "Zwitserland", "Frankrijk", "Duitsland", "VK", "Australië", "Zuid-Korea", "Rusland", "Nieuw-Zeeland", "Japan", "Qatar", "VAE · Dubai", "Saoedi-Arabië"]}, "pl": {"title": "Zaprzyjaźnij się ze światem,<br><span class=\"t\">🐰</span> zaczynając od Chin", "slogan": "Handel zbliża świat", "sideSub": "I przyjaciół razem", "shipLabel": "← Eksport", "planeLabel": "Import", "modal": {"ship": {"t": "Kupić z Chin", "s": "Importujesz z Chin (popyt eksportowy) — czego potrzebujesz?", "ph": "np. kupić akcesoria telefoniczne / części samochodowe…"}, "plane": {"t": "Sprzedać do Chin", "s": "Chcesz sprzedać do Chin (popyt importowy) — jaki produkt?", "ph": "np. produkty rolne / elektronika do sprzedaży w Chinach…"}, "send": "Wyślij 💬", "cancel": "Anuluj", "close": "Zamknij", "thanks": "Zapytanie otrzymane!", "thanksSub": "Wkrótce się skontaktujemy"}, "countries": ["USA", "Szwajcaria", "Francja", "Niemcy", "Wielka Brytania", "Australia", "Korea Południowa", "Rosja", "Nowa Zelandia", "Japonia", "Katar", "ZEA · Dubaj", "Arabia Saudyjska"]}, "tr": {"title": "Dünyayla arkadaş ol,<br><span class=\"t\">🐰</span> Çin’den başla", "slogan": "Ticaret dünyayı yakınlaştırır", "sideSub": "Ve arkadaşlar birlikte", "shipLabel": "← İhracat", "planeLabel": "İthalat", "modal": {"ship": {"t": "Çin’den satın al", "s": "Çin’den ithal ediyorsun (ihracat talebi) — neye ihtiyacın var?", "ph": "örn. telefon aksesuarı / otomobil parçası almak…"}, "plane": {"t": "Çin’e sat", "s": "Çin’e satmak istiyorsun (ithalat talebi) — hangi ürün?", "ph": "örn. tarım ürünleri / elektronik Çin’e satmak…"}, "send": "Gönder 💬", "cancel": "İptal", "close": "Kapat", "thanks": "Talebiniz alındı!", "thanksSub": "Yakında sizinle iletişime geçeceğiz"}, "countries": ["ABD", "İsviçre", "Fransa", "Almanya", "Birleşik Krallık", "Avustralya", "Güney Kore", "Rusya", "Yeni Zelanda", "Japonya", "Katar", "BAE · Dubai", "Suudi Arabistan"]}, "vi": {"title": "Kết bạn với thế giới,<br><span class=\"t\">🐰</span> bắt đầu từ Trung Quốc", "slogan": "Thương mại gắn kết thế giới", "sideSub": "Và bạn bè cùng nhau", "shipLabel": "← Xuất khẩu", "planeLabel": "Nhập khẩu", "modal": {"ship": {"t": "Mua từ Trung Quốc", "s": "Bạn nhập khẩu từ Trung Quốc (nhu cầu xuất khẩu) — bạn cần gì?", "ph": "vd. mua phụ kiện điện thoại / phụ tùng ô tô…"}, "plane": {"t": "Bán sang Trung Quốc", "s": "Bạn muốn bán sang Trung Quốc (nhu cầu nhập khẩu) — sản phẩm nào?", "ph": "vd. nông sản / điện tử bán sang Trung Quốc…"}, "send": "Gửi 💬", "cancel": "Hủy", "close": "Đóng", "thanks": "Đã nhận yêu cầu!", "thanksSub": "Chúng tôi sẽ liên hệ sớm"}, "countries": ["Hoa Kỳ", "Thụy Sĩ", "Pháp", "Đức", "Anh", "Úc", "Hàn Quốc", "Nga", "New Zealand", "Nhật Bản", "Qatar", "UAE · Dubai", "Ả Rập Xê Út"]}, "th": {"title": "เป็นเพื่อนกับโลก,<br><span class=\"t\">🐰</span> เริ่มจากจีน", "slogan": "การค้าเชื่อมโลกให้ใกล้ชิด", "sideSub": "และเพื่อนด้วยกัน", "shipLabel": "← ส่งออก", "planeLabel": "นำเข้า", "modal": {"ship": {"t": "ซื้อจากจีน", "s": "คุณนำเข้าจากจีน (ความต้องการส่งออก) — ต้องการอะไร?", "ph": "เช่น ซื้ออุปกรณ์โทรศัพท์ / ชิ้นส่วนรถยนต์…"}, "plane": {"t": "ขายให้จีน", "s": "คุณต้องการขายให้จีน (ความต้องการนำเข้า) — สินค้าอะไร?", "ph": "เช่น สินค้าเกษตร / อิเล็กทรอนิกส์ขายให้จีน…"}, "send": "ส่ง 💬", "cancel": "ยกเลิก", "close": "ปิด", "thanks": "ได้รับคำขอแล้ว!", "thanksSub": "เราจะติดต่อคุณเร็ว ๆ นี้"}, "countries": ["สหรัฐอเมริกา", "สวิตเซอร์แลนด์", "ฝรั่งเศส", "เยอรมนี", "อังกฤษ", "ออสเตรเลีย", "เกาหลีใต้", "รัสเซีย", "นิวซีแลนด์", "ญี่ปุ่น", "กาตาร์", "สหรัฐอาหรับเอมิเรตส์ · ดูไบ", "ซาอุดีอาระเบีย"]}, "id": {"title": "Berteman dengan dunia,<br><span class=\"t\">🐰</span> mulai dari Tiongkok", "slogan": "Perdagangan mendekatkan dunia", "sideSub": "Dan teman bersama", "shipLabel": "← Ekspor", "planeLabel": "Impor", "modal": {"ship": {"t": "Beli dari Tiongkok", "s": "Anda mengimpor dari Tiongkok (permintaan ekspor) — apa yang Anda butuhkan?", "ph": "mis. membeli aksesori HP / suku cadang mobil…"}, "plane": {"t": "Jual ke Tiongkok", "s": "Anda ingin menjual ke Tiongkok (permintaan impor) — produk apa?", "ph": "mis. produk pertanian / elektronik dijual ke Tiongkok…"}, "send": "Kirim 💬", "cancel": "Batal", "close": "Tutup", "thanks": "Permintaan diterima!", "thanksSub": "Kami akan segera menghubungi Anda"}, "countries": ["Amerika Serikat", "Swiss", "Prancis", "Jerman", "Inggris", "Australia", "Korea Selatan", "Rusia", "Selandia Baru", "Jepang", "Qatar", "UEA · Dubai", "Arab Saudi"]}, "sv": {"title": "Bli vän med världen,<br><span class=\"t\">🐰</span> med början från Kina", "slogan": "Handel för världen närmare", "sideSub": "Och vänner tillsammans", "shipLabel": "← Export", "planeLabel": "Import", "modal": {"ship": {"t": "Köp från Kina", "s": "Du importerar från Kina (exportefterfrågan) — vad behöver du?", "ph": "t.ex. köpa mobiltillbehör / bildelar…"}, "plane": {"t": "Sälj till Kina", "s": "Du vill sälja till Kina (importefterfrågan) — vilken produkt?", "ph": "t.ex. jordbruksprodukter / elektronik säljas till Kina…"}, "send": "Skicka 💬", "cancel": "Avbryt", "close": "Stäng", "thanks": "Förfrågan mottagen!", "thanksSub": "Vi kontaktar dig snart"}, "countries": ["USA", "Schweiz", "Frankrike", "Tyskland", "Storbritannien", "Australien", "Sydkorea", "Ryssland", "Nya Zeeland", "Japan", "Qatar", "UAE · Dubai", "Saudiarabien"]}, "uk": {"title": "Подружись зі світом,<br><span class=\"t\">🐰</span> починаючи з Китаю", "slogan": "Торгівля зближує світ", "sideSub": "І друзів разом", "shipLabel": "← Експорт", "planeLabel": "Імпорт", "modal": {"ship": {"t": "Купити в Китаї", "s": "Ви імпортуєте з Китаю (експортний попит) — що вам потрібно?", "ph": "напр. купити аксесуари для телефонів / автозапчастини…"}, "plane": {"t": "Продати в Китай", "s": "Ви хочете продати в Китай (імпортний попит) — який товар?", "ph": "напр. сільгосппродукція / електроніка для продажу в Китай…"}, "send": "Надіслати 💬", "cancel": "Скасувати", "close": "Закрити", "thanks": "Запит отримано!", "thanksSub": "Ми скоро зв’яжемося з вами"}, "countries": ["США", "Швейцарія", "Франція", "Німеччина", "Велика Британія", "Австралія", "Південна Корея", "Росія", "Нова Зеландія", "Японія", "Катар", "ОАЕ · Дубай", "Саудівська Аравія"]}};
+  const ANIMALS=[{e:'🦅'},{e:'🐂'},{e:'🐓'},{e:'🐻'},{e:'🦁'},{e:'🦘'},{e:'🐯'},{e:'🐻‍❄️'},{e:'🐨'},{e:'🌸'},{e:'🐆'},{e:'🐪'},{e:'🐫'}];
+  let lang='zh';
+
+  function setLang(l){
+    lang=l;
+    const d=I18N[l];
+    document.documentElement.dir = (l==='ar') ? 'rtl' : 'ltr';
+    // 标题/标语
+    document.querySelector('.side-left h1').innerHTML=d.title;
+    document.querySelector('.side-right strong').textContent=d.slogan;
+    document.querySelector('.side-right .side-sub').textContent=d.sideSub;
+    // 轮船/飞机标签
+    document.querySelector('.ship .label').textContent=d.shipLabel;
+    document.querySelector('.plane .label').textContent=d.planeImport||d.planeLabel;
+    // 弹窗按钮文案
+    document.getElementById('mSend').textContent=d.modal.send;
+    document.getElementById('mCancel').textContent=d.modal.cancel;
+    document.getElementById('mClose').textContent=d.modal.close;
+    // 重建动物列表(带对应语言国名)
+    orbitskin(d.countries);
+  }
+
+  function orbitskin(countries){
+    const orbit=document.getElementById('orbit');
+    // 移除旧动物卡(保留 center/ship/plane)
+    document.querySelectorAll('.animal').forEach(e=>e.remove());
+    const r=40,count=ANIMALS.length;
+    ANIMALS.forEach((a,i)=>{
+      const angle=(360/count)*i-90;
+      const x=50+r*Math.cos(angle*Math.PI/180);
+      const y=50+r*Math.sin(angle*Math.PI/180);
+      const div=document.createElement('div');
+      div.className='animal';
+      div.style.left=x+'%';div.style.top=y+'%';
+      div.style.transform='translate(-50%,-50%)';
+      div.style.animationDelay=(0.08+i*0.05)+'s';
+      div.setAttribute('data-name',countries[i]);
+      div.innerHTML=`<span class="emoji">${a.e}</span><div class="nm">${countries[i]}</div>`;
+      orbit.appendChild(div);
+    });
+    positionTransports();
+  }
+
+  document.getElementById('langSel').addEventListener('change',e=>setLang(e.target.value));
+  // 初始化动物(用默认中文名) —— 但原脚本已创建，此处改为调用 orbitskin
+  setLang('zh');
+
+</script>
+</body>
+</html>
