@@ -343,6 +343,7 @@
     div.style.transform='translate(-50%,-50%)';
     div.style.animationDelay=(0.08+i*0.05)+'s';
     div.setAttribute('data-name',a.n);
+    div.setAttribute('data-index', i);
     div.innerHTML=`<span class="emoji">${a.e}</span><div class="nm">${a.n}</div>`;
     orbit.appendChild(div);
   });
@@ -350,15 +351,15 @@
   // === 动态跟随：让轮船船头对准卡塔尔圈边缘、飞机机尾对准美国圈边缘 ===
   function positionTransports(){
     const orb=orbit.getBoundingClientRect();
-    function center(name){
-      const el=[...orbit.querySelectorAll('.animal')].find(a=>a.getAttribute('data-name')===name);
+    function center(idx){
+      const el=[...orbit.querySelectorAll('.animal')].find(a=>a.getAttribute('data-index')===String(idx));
       if(!el) return null;
       const b=el.getBoundingClientRect();
       return {cx:b.x+b.width/2-orb.x, cy:b.y+b.height/2-orb.y, right:b.x+b.width-orb.x, bottom:b.y+b.height-orb.y, left:b.x-orb.x};
     }
-    const america=center('美国');
-    const qatar=center('卡塔尔');
-    const china=center('中国')||{cx:orb.width/2, cy:orb.height/2}; // 中国=中心兔
+    const america=center(0);  // 美国=animals[0] (不受语言翻译影响)
+    const qatar=center(10);  // 卡塔尔=animals[10]
+    const china={cx:orb.width/2, cy:orb.height/2}; // 中国=中心兔
     if(!america||!qatar) return;
     // 飞机：放美国→中国连线上，机头朝中国（机尾朝美国）
     const pw=planeEl.offsetWidth || planeEl.getBoundingClientRect().width;
