@@ -119,6 +119,7 @@
   /* 环形 */
   .orbit{position:relative;width:min(560px,88vw);aspect-ratio:1/1;}
 
+  .hint{text-align:center;font-size:15px;font-weight:700;color:#a0432a;margin:8px 0 4px;}
   .center{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     width:30%;aspect-ratio:1/1;border-radius:50%;
@@ -289,6 +290,8 @@
       <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
     </header>
 
+    <div class="hint" id="hint">👆 点飞机或轮船，向我询价</div>
+
     <div class="orbit" id="orbit">
       <div class="center">
         <div class="emoji">🐰</div>
@@ -442,6 +445,7 @@
   // 中心兔名称/标签各语言国际
   const CN={zh:'中国',en:'China',fr:'Chine',de:'China',es:'China',it:'Cina',pt:'China',ru:'Китай',ar:'الصين',ja:'中国',ko:'중국',hi:'चीन',nl:'China',pl:'Chiny',tr:'Çin',vi:'Trung Quốc',th:'จีน',id:'Tiongkok',sv:'Kina',uk:'Китай'};
   const TAG={zh:'世界贸易中心',en:'Global Trade Center',fr:'Centre de commerce mondial',de:'Welthandelszentrum',es:'Centro de comercio mundial',it:'Centro mondiale del commercio',pt:'Centro de comércio mundial',ru:'Мировой торговый центр',ar:'مركز التجارة العالمي',ja:'世界貿易センター',ko:'세계 무역 센터',hi:'विश्व व्यापार केंद्र',nl:'Wereldhandelscentrum',pl:'Światowe centrum handlu',tr:'Dünya ticaret merkezi',vi:'Trung tâm thương mại thế giới',th:'ศูนย์การค้าโลก',id:'Pusat perdagangan dunia',sv:'Världshandelscentrum',uk:'Світовий торговий центр'};
+  const HINT={zh:'👆 点飞机或轮船，向我询价',en:'👆 Tap a plane or ship to send an inquiry',fr:'👆 Touchez un avion ou un bateau pour demander',de:'👆 Tippe auf Flugzeug oder Schiff für eine Anfrage',es:'👆 Toca un avión o un barco para consultar',it:'👆 Tocca un aereo o una nave per richiedere',pt:'👆 Toque num avião ou navio para perguntar',ru:'👆 Нажмите на самолёт или корабль, чтобы отправить запрос',ar:'👆 اضغط على طائرة أو سفينة لإرسال استفسار',ja:'👆 飛行機か船をタップして問い合わせ',ko:'👆 비행기나 배를 눌러 문의하세요',hi:'👆 हवाई जहाज़ या जहाज़ पर टैप करें पूछताछ के लिए',nl:'👆 Tik op een vliegtuig of schip voor een aanvraag',pl:'👆 Dotknij samolotu lub statku, aby zapytać',tr:'👆 Soru sormak için uçağa veya gemiye dokunun',vi:'👆 Nhấn máy bay hoặc tàu để gửi yêu cầu',th:'👆 แตะเครื่องบินหรือเรือเพื่อสอบถาม',id:'👆 Ketuk pesawat atau kapal untuk bertanya',sv:'👆 Tryck på ett flygplan eller fartyg för att fråga',uk:'👆 Натисніть на літак або корабель, щоб надіслати запит'};
   const ANIMALS=[{e:'🦅'},{e:'🐂'},{e:'🐓'},{e:'🐻'},{e:'🦁'},{e:'🦘'},{e:'🐯'},{e:'🌸'},{e:'🐨'},{e:'🐻‍❄️'},{e:'🐆'},{e:'🐪'},{e:'🐫'}];
   let lang='en';
 
@@ -462,6 +466,7 @@
     // 中心兔名称/标签国标化
     const cnEl=document.querySelector('.center .name'); if(cnEl&&CN[l]) cnEl.textContent=CN[l];
     const ctEl=document.querySelector('.center .tag'); if(ctEl&&TAG[l]) ctEl.textContent='⭐ '+TAG[l];
+    const hintEl=document.getElementById('hint'); if(hintEl&&HINT[l]) hintEl.textContent=HINT[l];
     // 轮船/飞机标签
     document.querySelector('.ship .label').textContent=d.shipLabel;
     document.querySelector('.plane .label').textContent=d.planeImport||d.planeLabel;
