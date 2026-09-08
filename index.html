@@ -364,7 +364,7 @@
     const pw=planeEl.offsetWidth || planeEl.getBoundingClientRect().width;
     const ph=planeEl.offsetHeight || planeEl.getBoundingClientRect().height;
     const pAng=Math.atan2(china.cy-america.cy, china.cx-america.cx); // 美国→中国方向
-    const pT=0.62;                            // 靠美国一侧，不挡中心兔
+    const pT=0.5;                            // 放在美国→中国连线正中间
     const px=america.cx+(china.cx-america.cx)*pT;
     const py=america.cy+(china.cy-america.cy)*pT;
     planeEl.style.left=(px-pw/2)+'px';
@@ -374,7 +374,7 @@
     const sb=shipEl.getBoundingClientRect();
     const sw=sb.width, sh2=sb.height;
     const sAng=Math.atan2(qatar.cy-china.cy, qatar.cx-china.cx); // 中国→卡塔尔方向
-    const sT=0.55;                            // 靠近卡塔尔一侧
+    const sT=0.5;                            // 放在中国→卡塔尔连线正中间
     const sx=china.cx+(qatar.cx-china.cx)*sT;
     const sy=china.cy+(qatar.cy-china.cy)*sT;
     shipEl.style.left=(sx-sw/2)+'px';
