@@ -212,6 +212,68 @@
   .modal-send:hover{background:#e8503a;}
   .modal-thanks{display:none;}
 
+
+  /* ===== 移动端适配（竖屏手机） ===== */
+  @media (max-width: 768px){
+    .stage{
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      padding:70px 12px 12px; /* 顶部留白给语言选择器 */
+      width:100%;height:100%;
+      position:relative;
+      overflow:hidden;
+    }
+    /* 语言选择器固定顶部 */
+    .langsel{top:10px;font-size:14px;padding:8px 16px;}
+
+    /* 左侧标题：放圆圈上方，居中、缩小，不换行重叠 */
+    .side-left{
+      order:-1;
+      width:100%;
+      max-width:none;
+      text-align:center;
+      margin-bottom:2px;
+    }
+    .side-left h1{font-size:clamp(18px,5.4vw,26px);line-height:1.15;}
+    .side-left .eyebrow{font-size:11px;padding:5px 14px;margin-bottom:6px;}
+
+    /* 圆圈：缩小一点，避免动物卡片贴边被切 */
+    .orbit{
+      width:min(300px,68vmin);
+      max-height:52vh;
+      margin:0 auto;
+    }
+    .center .name{font-size:15px;}
+    .center .tag{font-size:8px;padding:3px 10px;}
+    .center .emoji{font-size:clamp(36px,10vw,54px);}
+
+    /* 右侧标语：放圆圈下方，缩小、居中 */
+    .side-right{
+      order:2;
+      width:100%;
+      max-width:none;
+      font-size:14px;
+      text-align:center;
+      margin-top:2px;
+    }
+    .side-right .side-sub{font-size:12px;}
+
+    /* 动物卡片字号（稍缩小，名字更完整显示） */
+    .animal{width:14%;background:rgba(255,255,255,.97);}
+    .animal .emoji{font-size:clamp(18px,6.5vw,30px);}
+    .animal .nm{font-size:9px;line-height:1.1;padding:0 2px;white-space:nowrap;}
+
+    /* 运输元素（轮船/飞机）适当缩小 */
+    .ship{font-size:clamp(34px,10vw,48px);}
+    .plane{font-size:clamp(30px,9vw,44px);}
+    .ship .label{font-size:9px;bottom:-22px;}
+    .plane .label{font-size:9px;bottom:-22px;}
+
+    footer{font-size:11px;bottom:8px;}
+  }
+
 </style>
 </head>
 <body>
