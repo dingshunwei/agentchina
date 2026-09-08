@@ -1,9 +1,59 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>世界贸易 · 可爱动物环 · 中国兔兔</title>
+<title>Trade with China · Cute Animal Globe — China Bunny & 13 Countries</title>
+
+<!-- ===== SEO ===== -->
+<meta name="description" content="Make friends with the world starting from China. Explore 13 cute animals representing global trade, and send a buy-from-China or sell-to-China inquiry with one click. 中国兔兔 · 世界贸易 · 可爱动物环.">
+<meta name="keywords" content="China trade, buy from China, sell to China, China import export, China supplier, global trade, cute animals, China bunny, 从中国采购, 卖到中国, 中国贸易">
+<meta name="author" content="Agent China">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#ff8b7a">
+<link rel="canonical" href="https://agentchina.uk/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐰</text></svg>">
+
+<!-- ===== Open Graph (Facebook / WhatsApp / LinkedIn) ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Agent China — World Trade">
+<meta property="og:title" content="Trade with China · Cute Animal Globe — China Bunny & 13 Countries">
+<meta property="og:description" content="Make friends with the world starting from China. Click a ship or plane to send a buy-from-China or sell-to-China inquiry — 13 cute animals, 20 languages.">
+<meta property="og:url" content="https://agentchina.uk/">
+<meta property="og:image" content="https://agentchina.uk/og-image.png">
+<meta property="og:locale" content="en_US">
+
+<!-- ===== Twitter Card ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trade with China · Cute Animal Globe">
+<meta name="twitter:description" content="13 cute animals, 20 languages — buy from or sell to China with one click inquiry.">
+<meta name="twitter:image" content="https://agentchina.uk/og-image.png">
+
+<!-- ===== Structured Data (JSON-LD) ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Agent China — World Trade",
+  "url": "https://agentchina.uk/",
+  "description": "Global trade partner hub: buy from China or sell to China via one-click inquiry. 13 countries, 20 languages.",
+  "logo": "https://agentchina.uk/og-image.png",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "sales",
+    "url": "https://agentchina.uk/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Agent China — World Trade",
+  "url": "https://agentchina.uk/",
+  "inLanguage": ["en","zh","fr","de","es","it","pt","ru","ar","ja","ko","hi","nl","pl","tr","vi","th","id","sv","uk"]
+}
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@400;600;700&display=swap');
 
@@ -336,6 +386,12 @@
     lang=l;
     const d=I18N[l];
     document.documentElement.dir = (l==='ar') ? 'rtl' : 'ltr';
+    // SEO: html lang 随语言切换
+    document.documentElement.lang = l;
+    // SEO: og/twitter locale 随语言
+    const tg=document.querySelector('meta[property="og:title"]'); if(tg) tg.setAttribute('content', d.title.replace(/<[^>]+>/g,''));
+    const ogd=document.querySelector('meta[property="og:description"]'); if(ogd) ogd.setAttribute('content', d.slogan+' — '+d.sideSub);
+    document.title = (d.slogan) + ' | Agent China';
     // 标题/标语
     document.querySelector('.side-left h1').innerHTML=d.title;
     document.querySelector('.side-right strong').textContent=d.slogan;
