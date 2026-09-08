@@ -350,37 +350,24 @@
 
   // === 动态跟随：让轮船船头对准卡塔尔圈边缘、飞机机尾对准美国圈边缘 ===
   function positionTransports(){
-    const orb=orbit.getBoundingClientRect();
-    function center(idx){
-      const el=[...orbit.querySelectorAll('.animal')].find(a=>a.getAttribute('data-index')===String(idx));
-      if(!el) return null;
-      const b=el.getBoundingClientRect();
-      return {cx:b.x+b.width/2-orb.x, cy:b.y+b.height/2-orb.y, right:b.x+b.width-orb.x, bottom:b.y+b.height-orb.y, left:b.x-orb.x};
+    // 用与动物完全相同的数学角度放置(美国=index0,卡塔尔=index10)，不依赖DOM查找，避免翻译/重建导致找不到
+    function pt(i){ const a=(360/count)*i-90; return {x:50+r*Math.cos(a*Math.PI/180), y:50+r*Math.sin(a*Math.PI/180)}; }
+    const us=pt(0);   // 美国
+    const qa=pt(10);  // 卡塔尔
+    const cn={x:50,y:50}; // 中国=orbit中心
+    function place(el,xp,yp,rot){
+      const pw=el.offsetWidth||el.getBoundingClientRect().width;
+      const ph=el.offsetHeight||el.getBoundingClientRect().height;
+      el.style.left=(xp/100*orbit.clientWidth - pw/2)+'px';
+      el.style.top =(yp/100*orbit.clientHeight - ph/2)+'px';
+      el.style.transform='rotate('+rot+'deg)';
     }
-    const america=center(0);  // 美国=animals[0] (不受语言翻译影响)
-    const qatar=center(10);  // 卡塔尔=animals[10]
-    const china={cx:orb.width/2, cy:orb.height/2}; // 中国=中心兔
-    if(!america||!qatar) return;
-    // 飞机：放美国→中国连线上，机头朝中国（机尾朝美国）
-    const pw=planeEl.offsetWidth || planeEl.getBoundingClientRect().width;
-    const ph=planeEl.offsetHeight || planeEl.getBoundingClientRect().height;
-    const pAng=Math.atan2(china.cy-america.cy, china.cx-america.cx); // 美国→中国方向
-    const pT=0.5;                            // 放在美国→中国连线正中间
-    const px=america.cx+(china.cx-america.cx)*pT;
-    const py=america.cy+(china.cy-america.cy)*pT;
-    planeEl.style.left=(px-pw/2)+'px';
-    planeEl.style.top=(py-ph/2)+'px';
-    planeEl.style.transform='rotate('+(pAng*180/Math.PI-45)+'deg)'; // ✈️默认朝右上，减45°让机头仍指目标
-    // 轮船：放中国→卡塔尔连线上，船头朝卡塔尔（船尾朝中国）
-    const sb=shipEl.getBoundingClientRect();
-    const sw=sb.width, sh2=sb.height;
-    const sAng=Math.atan2(qatar.cy-china.cy, qatar.cx-china.cx); // 中国→卡塔尔方向
-    const sT=0.5;                            // 放在中国→卡塔尔连线正中间
-    const sx=china.cx+(qatar.cx-china.cx)*sT;
-    const sy=china.cy+(qatar.cy-china.cy)*sT;
-    shipEl.style.left=(sx-sw/2)+'px';
-    shipEl.style.top=(sy-sh2/2)+'px';
-    shipEl.style.transform='rotate('+(sAng*180/Math.PI-180)+'deg)'; // 🚢默认朝左，补偿后船头指目标
+    // 飞机：放美国↔中国 连线中点，机头朝中国（机尾朝美国）
+    const pAng=Math.atan2(cn.y-us.y, cn.x-us.x)*180/Math.PI - 45; // ✈️默认朝右上，减45°
+    place(planeEl, (us.x+cn.x)/2, (us.y+cn.y)/2, pAng);
+    // 轮船：放中国↔卡塔尔 连线中点，船头朝卡塔尔（船尾朝中国）
+    const sAng=Math.atan2(qa.y-cn.y, qa.x-cn.x)*180/Math.PI - 180; // 🚢默认朝左，补偿
+    place(shipEl, (cn.x+qa.x)/2, (cn.y+qa.y)/2, sAng);
     requestAnimationFrame(positionTransports);
   }
   requestAnimationFrame(positionTransports);
