@@ -367,7 +367,7 @@
     }
     // 飞机：放美国↔中国 连线中点，机头朝中国（机尾朝美国）
     const pAng=Math.atan2(cn.y-us.y, cn.x-us.x)*180/Math.PI - 45; // ✈️默认朝右上，减45°
-    place(planeEl, us.x, us.y-7, pAng); // 飞机放在美国(USA)头像上方, 机头朝下指中国
+    place(planeEl, (us.x+cn.x)/2, (us.y+cn.y)/2, pAng); // 飞机在美国↔中国连线中间, 机头朝中国/尾朝美国
     // 轮船：放中国↔卡塔尔 连线中点，船头朝卡塔尔（船尾朝中国）
     const sAng=Math.atan2(qa.y-cn.y, qa.x-cn.x)*180/Math.PI - 180; // 🚢默认朝左，补偿
     place(shipEl, (cn.x+qa.x)/2, (cn.y+qa.y)/2, sAng);
