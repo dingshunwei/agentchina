@@ -200,7 +200,7 @@
         </div>
         <div class="modal-thanks" id="mThanks">
           <div class="modal-emoji">🎉</div>
-          <div class="modal-title">已收到你的需求！</div>
+          <div class="modal-title" id="mThanksTitle">已收到你的需求！</div>
           <div class="modal-sub" id="mThanksText">我们会尽快联系你</div>
           <button class="modal-btn modal-cancel" id="mClose">关闭</button>
         </div>
@@ -320,7 +320,9 @@
     list.push(rec); localStorage.setItem('trade_leads',JSON.stringify(list));
     // 同步提交到后端（作者 App 可接收）
     postLead(rec);
-    mThanksText.textContent='「'+t+'」 已记录，我们会尽快联系你';
+    const _d=I18N[lang]||I18N.zh;
+    mThanksText.dataset.lead='1';
+    mThanksText.textContent='「'+t+'」 '+_d.modal.thanksSub;
     mForm.style.display='none'; mThanks.style.display='block';
   });
 
@@ -345,6 +347,9 @@
     document.getElementById('mSend').textContent=d.modal.send;
     document.getElementById('mCancel').textContent=d.modal.cancel;
     document.getElementById('mClose').textContent=d.modal.close;
+    // 感谢提示标题/副文国际化
+    const tt=document.getElementById('mThanksTitle'); if(tt) tt.textContent=d.modal.thanks;
+    const ts=document.getElementById('mThanksText'); if(ts && !ts.dataset.lead) ts.textContent=d.modal.thanksSub;
     // 重建动物列表(带对应语言国名)
     orbitskin(d.countries);
   }
