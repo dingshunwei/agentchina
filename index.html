@@ -299,6 +299,10 @@
         <span class="pi">🔩</span>
         <span class="pt"><b id="pbt">High-precision Bearings · Fasteners</b><i>P5 / P6 · P4 / P2 · 24 product lines →</i></span>
       </a>
+      <a class="prod" id="prodCrystals" href="crystals.html">
+        <span class="pi">📡</span>
+        <span class="pt"><b id="pct">Quartz Crystals · Oscillators</b><i>32.768 kHz – UHF · 11 product lines →</i></span>
+      </a>
     </header>
 
     <div class="orbit" id="orbit">
@@ -462,6 +466,7 @@
   const PB={zh:'高精密轴承 · 紧固件',en:'High-precision Bearings · Fasteners',fr:'Roulements de précision · Fixations',de:'Hochpräzisionslager · Verbindungselemente',es:'Rodamientos de precisión · Sujeciones',it:'Cuscinetti di precisione · Elementi di fissaggio',pt:'Rolamentos de precisão · Fixadores',ru:'Высокоточные подшипники · Крепёж',ar:'محامل عالية الدقة · مثبتات',ja:'高精度ベアリング · ファスナー',ko:'고정밀 베어링 · 체결구',hi:'उच्च-परिशुद्धता बेयरिंग · फास्टनर',nl:'Precisielagers · Bevestigingsmiddelen',pl:'Łożyska precyzyjne · Elementy złączne',tr:'Hassas Rulmanlar · Bağlantı Elemanları',vi:'Vòng bi chính xác cao · Ốc vít',th:'ตลับลูกปืนความแม่นยำสูง · สลักเกลียว',id:'Bearing presisi tinggi · Pengencang',sv:'Högprecisionslager · Fästelement',uk:'Високоточні підшипники · Кріплення'};
   const INQ={zh:'高精密轴承 / 紧固件 —— 请报价，数量：',en:'High-precision bearings / fasteners — please quote, qty: ',fr:'Roulements / fixations de précision — devis SVP, qté : ',de:'Hochpräzisionslager / Verbindungselemente — bitte Angebot, Menge: ',es:'Rodamientos / sujeciones de precisión — presupuesto, cant.: ',it:'Cuscinetti / fissaggi di precisione — preventivo, q.tà: ',pt:'Rolamentos / fixadores de precisão — orçamento, qtd: ',ru:'Высокоточные подшипники / крепёж — нужен расчёт, кол-во: ',ar:'محامل / مثبتات عالية الدقة — يرجى التسعير، الكمية: ',ja:'高精度ベアリング／ファスナー — お見積り希望、数量：',ko:'고정밀 베어링/체결구 — 견적 요청, 수량: ',hi:'उच्च-परिशुद्धता बेयरिंग/फास्टनर — कृपया कोटेशन, मात्रा: ',nl:'Precisielagers/bevestiging — graag prijsopgave, aantal: ',pl:'Łożyska/elementy złączne — proszę o wycenę, ilość: ',tr:'Hassas rulman/bağlantı elemanı — lütfen fiyat, adet: ',vi:'Vòng bi/ốc vít chính xác cao — xin báo giá, số lượng: ',th:'ตลับลูกปืน/สลักเกลียวความแม่นยำสูง — ขอใบเสนอราคา จำนวน: ',id:'Bearing/pengencang presisi tinggi — mohon penawaran, qty: ',sv:'Precisionslager/fästelement — begär offert, antal: ',uk:'Високоточні підшипники/кріплення — просимо ціну, к-сть: '};
   const ANIMALS=[{e:'🦅'},{e:'🐂'},{e:'🐓'},{e:'🐻'},{e:'🦁'},{e:'🦘'},{e:'🐯'},{e:'🌸'},{e:'🐨'},{e:'🐻‍❄️'},{e:'🐆'},{e:'🐪'},{e:'🐫'}];
+  const PC={zh:'石英晶振 · 振荡器',en:'Quartz Crystals · Oscillators',fr:'Cristaux à quartz · Oscillateurs',de:'Quarz-Kristalle · Oszillatoren',es:'Cristales de cuarzo · Osciladores',it:'Cristalli al quarzo · Oscillatori',pt:'Cristais de quartzo · Osciladores',ru:'Кварцевые резонаторы · Генераторы',ar:'بلورات كوارتز · مذبذبات',ja:'水晶振動子 · 発振器',ko:'수정 크리스털 · 오실레이터',hi:'क्वार्ट्ज क्रिस्टल · ऑसिलेटर',nl:'Kwartskristallen · Oscillatoren',pl:'Kwarc · Oscylatory',tr:'Kuvars Kristaller · Osilatörler',vi:'Tinh thể thạch anh · Bộ dao động',th:'คริสตัลควอตซ์ · ออสซิลเลเตอร์',id:'Kristal Kuarsa · Osilator',sv:'Kvartskristaller · Oscillatorer',uk:'Кварцові резонатори · Генератори'};
   let lang='en';
 
   function setLang(l){
@@ -477,6 +482,7 @@
     // 标题/标语
     document.querySelector('.side-left h1').innerHTML=d.title;
     const _pbt=document.getElementById('pbt'); if(_pbt) _pbt.textContent=PB[l]||PB.en;
+    const _pct=document.getElementById('pct'); if(_pct) _pct.textContent=PC[l]||PC.en;
     document.querySelector('.side-right strong').textContent=d.slogan;
     document.querySelector('.side-right .side-sub').textContent=d.sideSub;
     // 中心兔名称/标签国标化
