@@ -295,10 +295,10 @@
       <div class="eyebrow">🌏 GLOBAL FRIENDS</div>
       <select id="langSel" class="langsel"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option><option value="ru">Русский</option><option value="ar">العربية</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="hi">हिन्दी</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="tr">Türkçe</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option><option value="id">Bahasa Indonesia</option><option value="sv">Svenska</option><option value="uk">Українська</option><option value="zh">中文</option></select>
       <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
-      <button class="prod" id="prodBearings" type="button">
+      <a class="prod" id="prodBearings" href="bearings.html">
         <span class="pi">🔩</span>
-        <span class="pt"><b id="pbt">High-precision Bearings · Fasteners</b><i>P5 / P6 · P4 / P2 · DIN / ANSI / GB</i></span>
-      </button>
+        <span class="pt"><b id="pbt">High-precision Bearings · Fasteners</b><i>P5 / P6 · P4 / P2 · 24 product lines →</i></span>
+      </a>
     </header>
 
     <div class="orbit" id="orbit">
@@ -409,9 +409,7 @@
   }
   document.querySelector('.ship').addEventListener('click',()=>openModal('ship'));
   document.querySelector('.plane').addEventListener('click',()=>openModal('plane'));
-  // 产品入口：高精密轴承 / 紧固件 -> 直接开询盘弹窗并预填
-  const _prodEl=document.getElementById('prodBearings');
-  if(_prodEl) _prodEl.addEventListener('click',()=>{ openModal('ship'); mText.value=(INQ[lang]||INQ.en); mText.focus(); });
+  // 产品入口：高精密轴承 / 紧固件 -> 独立英文产品页 bearings.html（锚点链接，无需 JS）
   document.getElementById('mCancel').addEventListener('click',()=>modal.classList.remove('show'));
   document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('show'));
   modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('show'); });
