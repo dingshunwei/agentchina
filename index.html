@@ -104,6 +104,13 @@
   .side-right{font-size:clamp(16px,2vw,22px);font-weight:700;color:#e8503a;}
   .side-right .hand{font-size:26px;}
   .side-sub{display:block;font-size:12px;color:#8a7466;margin-top:6px;font-weight:400;}
+  .prod{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 14px;border:2px solid rgba(232,80,58,.22);background:#fff;border-radius:14px;cursor:pointer;text-align:left;font:inherit;box-shadow:0 3px 0 rgba(0,0,0,.05);transition:transform .15s,box-shadow .15s;}
+  .prod:hover{transform:translateY(-1px);box-shadow:0 5px 0 rgba(0,0,0,.07);}
+  .prod .pi{font-size:22px;line-height:1;}
+  .prod .pt{display:flex;flex-direction:column;}
+  .prod .pt b{color:var(--ink);font-size:14px;font-weight:800;}
+  .prod .pt i{color:var(--ink-soft);font-size:11px;font-style:normal;margin-top:2px;}
+  @media(max-width:820px){.prod{margin-top:10px;padding:8px 10px;}.prod .pt b{font-size:12px;}.prod .pt i{font-size:10px;}}
 
   /* 标题 - 紧凑 */
   header{text-align:center;margin-bottom:14px;}
@@ -288,6 +295,10 @@
       <div class="eyebrow">🌏 GLOBAL FRIENDS</div>
       <select id="langSel" class="langsel"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option><option value="ru">Русский</option><option value="ar">العربية</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="hi">हिन्दी</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="tr">Türkçe</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option><option value="id">Bahasa Indonesia</option><option value="sv">Svenska</option><option value="uk">Українська</option><option value="zh">中文</option></select>
       <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
+      <button class="prod" id="prodBearings" type="button">
+        <span class="pi">🔩</span>
+        <span class="pt"><b id="pbt">High-precision Bearings · Fasteners</b><i>P5 / P6 · P4 / P2 · DIN / ANSI / GB</i></span>
+      </button>
     </header>
 
     <div class="orbit" id="orbit">
@@ -398,6 +409,9 @@
   }
   document.querySelector('.ship').addEventListener('click',()=>openModal('ship'));
   document.querySelector('.plane').addEventListener('click',()=>openModal('plane'));
+  // 产品入口：高精密轴承 / 紧固件 -> 直接开询盘弹窗并预填
+  const _prodEl=document.getElementById('prodBearings');
+  if(_prodEl) _prodEl.addEventListener('click',()=>{ openModal('ship'); mText.value=(INQ[lang]||INQ.en); mText.focus(); });
   document.getElementById('mCancel').addEventListener('click',()=>modal.classList.remove('show'));
   document.getElementById('mClose').addEventListener('click',()=>modal.classList.remove('show'));
   modal.addEventListener('click',e=>{ if(e.target===modal) modal.classList.remove('show'); });
@@ -447,6 +461,8 @@
   const CN={zh:'中国',en:'China',fr:'Chine',de:'China',es:'China',it:'Cina',pt:'China',ru:'Китай',ar:'الصين',ja:'中国',ko:'중국',hi:'चीन',nl:'China',pl:'Chiny',tr:'Çin',vi:'Trung Quốc',th:'จีน',id:'Tiongkok',sv:'Kina',uk:'Китай'};
   const TAG={zh:'世界贸易中心',en:'Global Trade Center',fr:'Centre de commerce mondial',de:'Welthandelszentrum',es:'Centro de comercio mundial',it:'Centro mondiale del commercio',pt:'Centro de comércio mundial',ru:'Мировой торговый центр',ar:'مركز التجارة العالمي',ja:'世界貿易センター',ko:'세계 무역 센터',hi:'विश्व व्यापार केंद्र',nl:'Wereldhandelscentrum',pl:'Światowe centrum handlu',tr:'Dünya ticaret merkezi',vi:'Trung tâm thương mại thế giới',th:'ศูนย์การค้าโลก',id:'Pusat perdagangan dunia',sv:'Världshandelscentrum',uk:'Світовий торговий центр'};
   const HINT={zh:'👆 点飞机或轮船，向我询价',en:'👆 Tap a plane or ship to send an inquiry',fr:'👆 Touchez un avion ou un bateau pour demander',de:'👆 Tippe auf Flugzeug oder Schiff für eine Anfrage',es:'👆 Toca un avión o un barco para consultar',it:'👆 Tocca un aereo o una nave per richiedere',pt:'👆 Toque num avião ou navio para perguntar',ru:'👆 Нажмите на самолёт или корабль, чтобы отправить запрос',ar:'👆 اضغط على طائرة أو سفينة لإرسال استفسار',ja:'👆 飛行機か船をタップして問い合わせ',ko:'👆 비행기나 배를 눌러 문의하세요',hi:'👆 हवाई जहाज़ या जहाज़ पर टैप करें पूछताछ के लिए',nl:'👆 Tik op een vliegtuig of schip voor een aanvraag',pl:'👆 Dotknij samolotu lub statku, aby zapytać',tr:'👆 Soru sormak için uçağa veya gemiye dokunun',vi:'👆 Nhấn máy bay hoặc tàu để gửi yêu cầu',th:'👆 แตะเครื่องบินหรือเรือเพื่อสอบถาม',id:'👆 Ketuk pesawat atau kapal untuk bertanya',sv:'👆 Tryck på ett flygplan eller fartyg för att fråga',uk:'👆 Натисніть на літак або корабель, щоб надіслати запит'};
+  const PB={zh:'高精密轴承 · 紧固件',en:'High-precision Bearings · Fasteners',fr:'Roulements de précision · Fixations',de:'Hochpräzisionslager · Verbindungselemente',es:'Rodamientos de precisión · Sujeciones',it:'Cuscinetti di precisione · Elementi di fissaggio',pt:'Rolamentos de precisão · Fixadores',ru:'Высокоточные подшипники · Крепёж',ar:'محامل عالية الدقة · مثبتات',ja:'高精度ベアリング · ファスナー',ko:'고정밀 베어링 · 체결구',hi:'उच्च-परिशुद्धता बेयरिंग · फास्टनर',nl:'Precisielagers · Bevestigingsmiddelen',pl:'Łożyska precyzyjne · Elementy złączne',tr:'Hassas Rulmanlar · Bağlantı Elemanları',vi:'Vòng bi chính xác cao · Ốc vít',th:'ตลับลูกปืนความแม่นยำสูง · สลักเกลียว',id:'Bearing presisi tinggi · Pengencang',sv:'Högprecisionslager · Fästelement',uk:'Високоточні підшипники · Кріплення'};
+  const INQ={zh:'高精密轴承 / 紧固件 —— 请报价，数量：',en:'High-precision bearings / fasteners — please quote, qty: ',fr:'Roulements / fixations de précision — devis SVP, qté : ',de:'Hochpräzisionslager / Verbindungselemente — bitte Angebot, Menge: ',es:'Rodamientos / sujeciones de precisión — presupuesto, cant.: ',it:'Cuscinetti / fissaggi di precisione — preventivo, q.tà: ',pt:'Rolamentos / fixadores de precisão — orçamento, qtd: ',ru:'Высокоточные подшипники / крепёж — нужен расчёт, кол-во: ',ar:'محامل / مثبتات عالية الدقة — يرجى التسعير، الكمية: ',ja:'高精度ベアリング／ファスナー — お見積り希望、数量：',ko:'고정밀 베어링/체결구 — 견적 요청, 수량: ',hi:'उच्च-परिशुद्धता बेयरिंग/फास्टनर — कृपया कोटेशन, मात्रा: ',nl:'Precisielagers/bevestiging — graag prijsopgave, aantal: ',pl:'Łożyska/elementy złączne — proszę o wycenę, ilość: ',tr:'Hassas rulman/bağlantı elemanı — lütfen fiyat, adet: ',vi:'Vòng bi/ốc vít chính xác cao — xin báo giá, số lượng: ',th:'ตลับลูกปืน/สลักเกลียวความแม่นยำสูง — ขอใบเสนอราคา จำนวน: ',id:'Bearing/pengencang presisi tinggi — mohon penawaran, qty: ',sv:'Precisionslager/fästelement — begär offert, antal: ',uk:'Високоточні підшипники/кріплення — просимо ціну, к-сть: '};
   const ANIMALS=[{e:'🦅'},{e:'🐂'},{e:'🐓'},{e:'🐻'},{e:'🦁'},{e:'🦘'},{e:'🐯'},{e:'🌸'},{e:'🐨'},{e:'🐻‍❄️'},{e:'🐆'},{e:'🐪'},{e:'🐫'}];
   let lang='en';
 
@@ -462,6 +478,7 @@
     document.title = (d.slogan) + ' | Agent China';
     // 标题/标语
     document.querySelector('.side-left h1').innerHTML=d.title;
+    const _pbt=document.getElementById('pbt'); if(_pbt) _pbt.textContent=PB[l]||PB.en;
     document.querySelector('.side-right strong').textContent=d.slogan;
     document.querySelector('.side-right .side-sub').textContent=d.sideSub;
     // 中心兔名称/标签国标化
