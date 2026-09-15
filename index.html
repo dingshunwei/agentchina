@@ -303,6 +303,10 @@
         <span class="pi">📡</span>
         <span class="pt"><b id="pct">Quartz Crystals · Oscillators</b><i>32.768 kHz – UHF · 11 product lines →</i></span>
       </a>
+      <a class="prod" id="prodMotors" href="motors.html">
+        <span class="pi">⚙️</span>
+        <span class="pt"><b id="pmt">Three-phase Asynchronous Motors</b><i>0.12 kW – 40 MW · IE3–IE5 · 10 product lines →</i></span>
+      </a>
       <a class="prod" id="prodSemi" href="https://www.semi.bid/" target="_blank" rel="noopener">
         <span class="pi">🔬</span>
         <span class="pt"><b id="pst">Semiconductor Datasheet Library</b><i>semi.bid · 7 makers · 870+ PDFs →</i></span>
@@ -477,6 +481,7 @@
   const PC={zh:'石英晶振 · 振荡器',en:'Quartz Crystals · Oscillators',fr:'Cristaux à quartz · Oscillateurs',de:'Quarz-Kristalle · Oszillatoren',es:'Cristales de cuarzo · Osciladores',it:'Cristalli al quarzo · Oscillatori',pt:'Cristais de quartzo · Osciladores',ru:'Кварцевые резонаторы · Генераторы',ar:'بلورات كوارتز · مذبذبات',ja:'水晶振動子 · 発振器',ko:'수정 크리스털 · 오실레이터',hi:'क्वार्ट्ज क्रिस्टल · ऑसिलेटर',nl:'Kwartskristallen · Oscillatoren',pl:'Kwarc · Oscylatory',tr:'Kuvars Kristaller · Osilatörler',vi:'Tinh thể thạch anh · Bộ dao động',th:'คริสตัลควอตซ์ · ออสซิลเลเตอร์',id:'Kristal Kuarsa · Osilator',sv:'Kvartskristaller · Oscillatorer',uk:'Кварцові резонатори · Генератори'};
   const PS={zh:'半导体公开资料库',en:'Semiconductor Datasheet Library'};
   const PA={zh:'AI 算力与服务器硬件',en:'AI Compute & Server Hardware'};
+  const PM={zh:'三相异步电机',en:'Three-phase Asynchronous Motors',fr:'Moteurs asynchrones triphasés',de:'Drehstrom-Asynchronmotoren',es:'Motores asíncronos trifásicos',it:'Motori asincroni trifase',pt:'Motores assíncronos trifásicos',ru:'Трёхфазные асинхронные двигатели',ja:'三相誘導電動機',ko:'3상 유도전동기',ar:'محركات حثية ثلاثية الطور',hi:'त्रि-चरण अतुल्यकालिक मोटर',nl:'Driefasige asynchrone motoren',pl:'Silniki asynchroniczne trójfazowe',tr:'Üç fazlı asenkron motorlar',vi:'Động cơ không đồng bộ ba pha',th:'มอเตอร์เหนี่ยวนำสามเฟส',id:'Motor induksi tiga fasa',sv:'Trefasiga asynkronmotorer',uk:'Трифазні асинхронні двигуни'};
   let lang='en';
 
   function setLang(l){
@@ -495,6 +500,7 @@
     const _pct=document.getElementById('pct'); if(_pct) _pct.textContent=PC[l]||PC.en;
     const _pst=document.getElementById('pst'); if(_pst) _pst.textContent=PS[l]||PS.en;
     const _pat=document.getElementById('pat'); if(_pat) _pat.textContent=PA[l]||PA.en;
+    const _pmt=document.getElementById('pmt'); if(_pmt) _pmt.textContent=PM[l]||PM.en;
     document.querySelector('.side-right strong').textContent=d.slogan;
     document.querySelector('.side-right .side-sub').textContent=d.sideSub;
     // 中心兔名称/标签国标化
