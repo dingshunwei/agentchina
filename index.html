@@ -126,7 +126,6 @@
   /* 环形 */
   .orbit{position:relative;width:min(560px,88vw);aspect-ratio:1/1;}
 
-  .hint{position:absolute;text-align:center;font-size:14px;font-weight:700;color:#a0432a;z-index:6;white-space:nowrap;}
   .center{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     width:30%;aspect-ratio:1/1;border-radius:50%;
@@ -223,15 +222,16 @@
 
   /* ===== 移动端适配（竖屏手机） ===== */
   @media (max-width: 768px){
+    html,body{height:auto;min-height:100%;overflow-y:auto;overflow-x:hidden;} /* 内容超高时可滚动，不再被裁 */
     .stage{
       flex-direction:column;
-      justify-content:center;
+      justify-content:flex-start;
       align-items:center;
       gap:10px;
-      padding:70px 12px 12px; /* 顶部留白给语言选择器 */
-      width:100%;height:100%;
+      padding:96px 12px 18px; /* 顶部留白给语言选择器，避免压住标题 */
+      width:100%;min-height:100%;height:auto;
       position:relative;
-      overflow:hidden;
+      overflow:visible;
     }
     /* 语言选择器固定顶部 */
     .langsel{top:10px;font-size:14px;padding:8px 16px;}
@@ -249,9 +249,8 @@
 
     /* 圆圈：缩小一点，避免动物卡片贴边被切 */
     .orbit{
-      width:min(300px,68vmin);
-      max-height:52vh;
-      margin:0 auto;
+      width:min(86vw,380px);
+      margin:6px auto 4px;
     }
     .center .name{font-size:15px;}
     .center .tag{font-size:8px;padding:3px 10px;}
@@ -269,9 +268,9 @@
     .side-right .side-sub{font-size:12px;}
 
     /* 动物卡片字号（稍缩小，名字更完整显示） */
-    .animal{width:14%;background:rgba(255,255,255,.97);}
-    .animal .emoji{font-size:clamp(18px,6.5vw,30px);}
-    .animal .nm{font-size:9px;line-height:1.1;padding:0 2px;white-space:nowrap;}
+    .animal{width:15%;background:rgba(255,255,255,.97);}
+    .animal .emoji{font-size:clamp(17px,6vw,28px);}
+    .animal .nm{font-size:8.5px;line-height:1.05;padding:0 1px;white-space:normal;overflow-wrap:anywhere;}
 
     /* 运输元素（轮船/飞机）适当缩小 */
     .ship{font-size:clamp(34px,10vw,48px);}
@@ -279,7 +278,7 @@
     .ship .label{font-size:9px;bottom:-22px;}
     .plane .label{font-size:9px;bottom:-22px;}
 
-    footer{font-size:11px;bottom:8px;}
+    footer{font-size:11px;position:static;margin:12px 0 4px;}
   }
 
 </style>
@@ -318,7 +317,6 @@
     </header>
 
     <div class="orbit" id="orbit">
-      <div class="hint" id="hint">👆 点飞机或轮船，给我留言</div>
       <div class="center">
         <div class="emoji">🐰</div>
         <div class="name">中国</div>
@@ -398,7 +396,6 @@
     const sAng=Math.atan2(qa.y-cn.y, qa.x-cn.x)*180/Math.PI - 180; // 🚢默认朝左，补偿
     place(shipEl, (cn.x+qa.x)/2, (cn.y+qa.y)/2, sAng);
     // 提示文字放在美国(USA)头像上方
-    const hintEl=document.getElementById('hint'); if(hintEl){ hintEl.style.left=(us.x/100*orbit.clientWidth - hintEl.offsetWidth/2)+'px'; hintEl.style.top=((us.y-10)/100*orbit.clientHeight)+'px'; }
     requestAnimationFrame(positionTransports);
   }
   requestAnimationFrame(positionTransports);
@@ -474,7 +471,7 @@
   // 中心兔名称/标签各语言国际
   const CN={zh:'中国',en:'China',fr:'Chine',de:'China',es:'China',it:'Cina',pt:'China',ru:'Китай',ar:'الصين',ja:'中国',ko:'중국',hi:'चीन',nl:'China',pl:'Chiny',tr:'Çin',vi:'Trung Quốc',th:'จีน',id:'Tiongkok',sv:'Kina',uk:'Китай'};
   const TAG={zh:'世界贸易中心',en:'Global Trade Center',fr:'Centre de commerce mondial',de:'Welthandelszentrum',es:'Centro de comercio mundial',it:'Centro mondiale del commercio',pt:'Centro de comércio mundial',ru:'Мировой торговый центр',ar:'مركز التجارة العالمي',ja:'世界貿易センター',ko:'세계 무역 센터',hi:'विश्व व्यापार केंद्र',nl:'Wereldhandelscentrum',pl:'Światowe centrum handlu',tr:'Dünya ticaret merkezi',vi:'Trung tâm thương mại thế giới',th:'ศูนย์การค้าโลก',id:'Pusat perdagangan dunia',sv:'Världshandelscentrum',uk:'Світовий торговий центр'};
-  const HINT={zh:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',en:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',fr:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',de:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',es:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',it:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',pt:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ru:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ar:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ja:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ko:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',hi:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',nl:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',pl:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',tr:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',vi:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',th:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',id:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',sv:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',uk:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message'};
+  const HINT_UNUSED={zh:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',en:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',fr:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',de:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',es:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',it:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',pt:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ru:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ar:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ja:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',ko:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',hi:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',nl:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',pl:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',tr:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',vi:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',th:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',id:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',sv:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message',uk:'👆 点飞机或轮船，给我留言 · Tap a plane or ship to leave a message'};
   const PB={zh:'高精密轴承 · 紧固件',en:'High-precision Bearings · Fasteners',fr:'Roulements de précision · Fixations',de:'Hochpräzisionslager · Verbindungselemente',es:'Rodamientos de precisión · Sujeciones',it:'Cuscinetti di precisione · Elementi di fissaggio',pt:'Rolamentos de precisão · Fixadores',ru:'Высокоточные подшипники · Крепёж',ar:'محامل عالية الدقة · مثبتات',ja:'高精度ベアリング · ファスナー',ko:'고정밀 베어링 · 체결구',hi:'उच्च-परिशुद्धता बेयरिंग · फास्टनर',nl:'Precisielagers · Bevestigingsmiddelen',pl:'Łożyska precyzyjne · Elementy złączne',tr:'Hassas Rulmanlar · Bağlantı Elemanları',vi:'Vòng bi chính xác cao · Ốc vít',th:'ตลับลูกปืนความแม่นยำสูง · สลักเกลียว',id:'Bearing presisi tinggi · Pengencang',sv:'Högprecisionslager · Fästelement',uk:'Високоточні підшипники · Кріплення'};
   const INQ={zh:'留言 · Leave a message — ',en:'留言 · Leave a message — ',fr:'留言 · Leave a message — ',de:'留言 · Leave a message — ',es:'留言 · Leave a message — ',it:'留言 · Leave a message — ',pt:'留言 · Leave a message — ',ru:'留言 · Leave a message — ',ar:'留言 · Leave a message — ',ja:'留言 · Leave a message — ',ko:'留言 · Leave a message — ',hi:'留言 · Leave a message — ',nl:'留言 · Leave a message — ',pl:'留言 · Leave a message — ',tr:'留言 · Leave a message — ',vi:'留言 · Leave a message — ',th:'留言 · Leave a message — ',id:'留言 · Leave a message — ',sv:'留言 · Leave a message — ',uk:'留言 · Leave a message — '};
   const ANIMALS=[{e:'🦅'},{e:'🐂'},{e:'🐓'},{e:'🐻'},{e:'🦁'},{e:'🦘'},{e:'🐯'},{e:'🌸'},{e:'🐨'},{e:'🐻‍❄️'},{e:'🐆'},{e:'🐪'},{e:'🐫'}];
@@ -506,7 +503,6 @@
     // 中心兔名称/标签国标化
     const cnEl=document.querySelector('.center .name'); if(cnEl&&CN[l]) cnEl.textContent=CN[l];
     const ctEl=document.querySelector('.center .tag'); if(ctEl&&TAG[l]) ctEl.textContent='⭐ '+TAG[l];
-    const hintEl=document.getElementById('hint'); if(hintEl&&HINT[l]) hintEl.textContent=HINT[l];
     // 轮船/飞机标签
     document.querySelector('.ship .label').textContent=d.shipLabel;
     document.querySelector('.plane .label').textContent=d.planeImport||d.planeLabel;
