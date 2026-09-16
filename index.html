@@ -333,6 +333,8 @@
         <div class="modal-title" id="mTitle">从中国买东西</div>
         <div class="modal-sub" id="mSub">告诉我你想从中国采购什么吧</div>
         <div id="mForm">
+          <input type="text" id="mn" placeholder="署名 Name *" style="width:100%;padding:10px 12px;margin-bottom:8px;border:1px solid #ddd;border-radius:10px;font-size:15px;box-sizing:border-box">
+          <input type="email" id="me" placeholder="邮箱 Email *" style="width:100%;padding:10px 12px;margin-bottom:8px;border:1px solid #ddd;border-radius:10px;font-size:15px;box-sizing:border-box">
           <textarea id="mText" placeholder="例如：想采购一批手机配件 / 汽车零件…写在这里"></textarea>
           <div class="modal-btns">
             <button class="modal-btn modal-cancel" id="mCancel">取消</button>
@@ -442,7 +444,7 @@
         },
         body:JSON.stringify({
           device_id:'website:'+rec.mode,
-          text:(rec.mode==='ship'?'[出口詢盤] ':'[進口詢盤] ')+rec.text,
+          text:(rec.mode==='ship'?'[出口詢盤] ':'[進口詢盤] ')+'['+(rec.name||'-')+' / '+(rec.email||'-')+'] '+rec.text,
           created_at:rec.time,
           is_read:false
         })
@@ -452,9 +454,12 @@
   }
   document.getElementById('mSend').addEventListener('click',()=>{
     const t=mText.value.trim();
+    const _nm=document.getElementById('mn'), _em=document.getElementById('me');
+    if(!_nm.value.trim()){ alert('请填写署名 / Please enter your name.'); _nm.focus(); return; }
+    if(!_em.value.trim()){ alert('请填写邮箱 / Please enter your email.'); _em.focus(); return; }
     if(!t){ mText.focus(); return; }
     // 保存询盘到 localStorage
-    const rec={mode,time:new Date().toISOString(),text:t};
+    const rec={mode,time:new Date().toISOString(),text:t,name:_nm.value.trim(),email:_em.value.trim()};
     const list=JSON.parse(localStorage.getItem('trade_leads')||'[]');
     list.push(rec); localStorage.setItem('trade_leads',JSON.stringify(list));
     // 同步提交到后端（作者 App 可接收）
@@ -462,6 +467,7 @@
     const _d=I18N[lang]||I18N.zh;
     mThanksText.dataset.lead='1';
     mThanksText.textContent='「'+t+'」 '+_d.modal.thanksSub;
+    _nm.value=''; _em.value='';
     mForm.style.display='none'; mThanks.style.display='block';
   });
 
