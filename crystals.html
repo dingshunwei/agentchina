@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quartz Crystals, Oscillators &amp; Timing Modules | Agent China</title>
-<meta name="description" content="Quartz crystal resonators, TCXO / OCXO / SPXO oscillators, low-jitter differential oscillators, RTC modules, MEMS oscillators, SAW / BAW filters and quartz sensors — 11 product lines for export. Request a quote.">
+<meta name="description" content="Quartz crystal resonators, TCXO / OCXO / SPXO oscillators, low-jitter differential oscillators, RTC modules, MEMS oscillators, SAW / BAW filters and quartz sensors — 11 product lines for export. Contact the author directly.">
 <meta name="keywords" content="quartz crystal, crystal oscillator, TCXO, OCXO, SPXO, DXO, 32.768kHz, RTC module, MEMS oscillator, SAW filter, BAW filter, quartz sensor, timing module, China crystal supplier">
 <link rel="canonical" href="https://www.agentchina.uk/crystals.html">
 <meta name="robots" content="index,follow,max-image-preview:large">
@@ -40,7 +40,6 @@
   .bd p{font-size:13.5px;color:var(--soft);}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
   .chip{background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:3px 9px;font-size:11.5px;font-weight:700;color:var(--soft);}
-  #quote{max-width:760px;margin:34px auto 0;padding:0 20px;}
   .form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 3px 0 rgba(0,0,0,.04);}
   .form h2{font-size:22px;margin-bottom:4px;}
   .form p.sub{color:var(--soft);font-size:13.5px;margin-bottom:14px;}
@@ -158,20 +157,6 @@
       </article>
 </div>
 
-<section id="quote">
-  <form class="form" id="qf" onsubmit="return false;">
-    <h2>Request a quote</h2>
-    <p class="sub">Tell us the type, frequency and quantity — we reply with price, lead time and shipping options.</p>
-    <div class="row">
-      <input id="qName" placeholder="Your name" autocomplete="name">
-      <input id="qMail" type="email" placeholder="Email" autocomplete="email">
-    </div>
-    <input id="qProd" placeholder="Product / frequency (e.g. 32.768 kHz SEAM, TCXO 26 MHz)">
-    <textarea id="qMsg" placeholder="Quantity, package size, stability / tolerance, application, destination country…"></textarea>
-    <button id="qSend" type="button">Send inquiry</button>
-    <div class="ok" id="qOk">Thanks — your inquiry has been received. We will contact you shortly.</div>
-  </form>
-</section>
 
 <footer>
   Product information is provided for reference only; specifications, packaging and markings may change without notice.
@@ -183,22 +168,6 @@
 
 const SUPABASE_URL='https://elrsrrvvuhfbkmxnvtod.supabase.co';
 const SUPABASE_ANON='sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
-document.getElementById('qSend').addEventListener('click',async function(){
-  var name=document.getElementById('qName').value.trim();
-  var mail=document.getElementById('qMail').value.trim();
-  var prod=document.getElementById('qProd').value.trim();
-  var msg=document.getElementById('qMsg').value.trim();
-  if(!msg&&!prod){document.getElementById('qMsg').focus();return;}
-  var text='[CRYSTALS INQUIRY] '+(prod?('Product: '+prod+' | '):'')+(name?('Name: '+name+' | '):'')+(mail?('Email: '+mail+' | '):'')+msg;
-  try{
-    await fetch(SUPABASE_URL+'/rest/v1/messages',{method:'POST',headers:{
-      'apikey':SUPABASE_ANON,'Authorization':'***'+SUPABASE_ANON,
-      'Content-Type':'application/json','Prefer':'return=minimal'},
-      body:JSON.stringify({device_id:'website:crystals',text:text,created_at:new Date().toISOString(),is_read:false})});
-  }catch(e){}
-  document.getElementById('qOk').style.display='block';
-  document.getElementById('qf').querySelectorAll('input,textarea').forEach(function(e){e.value='';});
-});
 </script>
 </body>
 </html>
