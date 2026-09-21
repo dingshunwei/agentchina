@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product Catalog | Agent China</title>
+<meta name="description" content="Live product catalog — industrial components, semiconductor materials, AI &amp; data-centre hardware, PCB, liquid cooling, diapers and more. Sourced and quality-checked in China.">
+<link rel="canonical" href="https://www.agentchina.uk/catalog.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Product Catalog | Agent China">
+<meta property="og:description" content="Live catalog of export-ready products from China — updated automatically.">
+<meta property="og:url" content="https://www.agentchina.uk/catalog.html">
+<meta property="og:image" content="https://www.agentchina.uk/icon-512.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.ico">
+<style>
+:root{
+  --bg:#fbf7ef;--card:#fffdfa;--ink:#5b4636;--ink-soft:#8a7466;
+  --line:#eadfcd;--accent:#c8734a;--accent2:#3f7d6a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 90% at 50% 0%,#fffdf8,#fbf7ef 60%);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.55}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 60px}
+header.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+header.top .brand{font-size:20px;font-weight:900;text-decoration:none}
+header.top .brand span{color:var(--accent)}
+header.top .sp{flex:1}
+select.langsel{padding:7px 10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font:600 13px inherit}
+h1{font-size:26px;margin:14px 0 4px}
+.sub{color:var(--ink-soft);font-size:13.5px;margin-bottom:14px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:16px 0 10px}
+.search{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:9px 14px}
+.search input{border:0;outline:0;background:none;font:600 14px inherit;color:var(--ink);width:100%}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:8px 0 14px}
+.tab{font:600 12.5px inherit;padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.tab.on,.tab:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 22px 40px -32px rgba(60,40,20,.8)}
+.card .ph{aspect-ratio:4/3;background:linear-gradient(145deg,#fffdfa,#f2ece0);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card .ph img{width:100%;height:100%;object-fit:contain;background:#fff;mix-blend-mode:multiply}
+.card .ph .ic{font-size:52px}
+.card .bd{padding:13px 15px 15px;display:flex;flex-direction:column;gap:7px;flex:1}
+.card .en{font-weight:800;font-size:14.5px;line-height:1.35}
+.card .zh{font-size:12.5px;color:var(--ink-soft);margin-top:-4px}
+.card ul{list-style:none;margin:2px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.card li{font-size:12.5px;color:var(--ink-soft);padding-inline-start:13px;position:relative;direction:ltr;text-align:start}
+.card li::before{content:"";position:absolute;inset-inline-start:0;top:8px;width:5px;height:5px;border-radius:2px;background:var(--accent);opacity:.8}
+.card .q{margin-top:auto;font:700 12.5px inherit;color:var(--accent);background:none;border:0;cursor:pointer;padding:8px 0 0;text-align:start}
+.card .q:hover{text-decoration:underline}
+.cat{font-size:11.5px;color:var(--accent2);font-weight:700}
+.more{display:block;margin:22px auto 0;padding:11px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font:700 13px inherit;cursor:pointer}
+.more:hover{border-color:var(--accent);color:var(--accent)}
+.empty{display:none;color:var(--ink-soft);padding:26px 0;text-align:center}
+.modal{position:fixed;inset:0;background:rgba(60,45,32,.45);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.modal.on{display:flex}
+.modal-box{background:#fff;border-radius:18px;max-width:430px;width:100%;padding:20px}
+.modal-box h3{margin:0 0 4px;font-size:18px}
+.modal-box p{margin:0 0 12px;color:var(--ink-soft);font-size:13px}
+.modal-box input,.modal-box textarea{width:100%;padding:10px 12px;margin-bottom:8px;border:1px solid #e3d8c6;border-radius:10px;font:600 14px inherit;box-sizing:border-box}
+.modal-box textarea{min-height:92px;resize:vertical}
+.btns{display:flex;gap:10px;justify-content:flex-end}
+.btns button{padding:10px 16px;border-radius:10px;border:0;font:700 13.5px inherit;cursor:pointer}
+.b-cancel{background:#f1e9dc;color:var(--ink)}
+.b-send{background:var(--accent);color:#fff}
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:12.5px;display:flex;gap:14px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/">🐰 Agent <span>China</span></a>
+    <div class="sp"></div>
+    <select id="langSel" class="langsel">
+      <option value="en">English</option><option value="zh">中文</option><option value="fr">Français</option>
+      <option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option>
+      <option value="pt">Português</option><option value="ru">Русский</option><option value="ar">العربية</option>
+      <option value="ja">日本語</option><option value="ko">한국어</option><option value="hi">हिन्दी</option>
+      <option value="nl">Nederlands</option><option value="pl">Polski</option><option value="tr">Türkçe</option>
+      <option value="vi">Tiếng Việt</option><option value="th">ไทย</option><option value="id">Bahasa Indonesia</option>
+      <option value="sv">Svenska</option><option value="uk">Українська</option>
+    </select>
+  </header>
+
+  <h1 id="hTitle">Product Catalog</h1>
+  <div class="sub" id="hSub">Live catalogue of export-ready products from China — new categories appear automatically.</div>
+
+  <div class="bar">
+    <label class="search">🔍<input id="q" type="search" placeholder="Search products / 搜索产品"></label>
+  </div>
+  <div class="tabs" id="tabs"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">Catalog is being updated.</div>
+  <button class="more" id="more" style="display:none">Show more</button>
+
+  <footer>
+    <span>© 2026 Agent China</span>
+    <a href="/">Home</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="/#contact">Contact</a>
+  </footer>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3 id="mTitle">Send an enquiry</h3>
+    <p id="mSub">Tell us the quantity and destination — we reply within one business day.</p>
+    <input id="mn" placeholder="Your name">
+    <input id="me" type="email" placeholder="Email">
+    <textarea id="mm"></textarea>
+    <div class="btns">
+      <button class="b-cancel" id="mCancel">Cancel</button>
+      <button class="b-send" id="mSend">Send</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var API='https://api.agentchina.uk';
+  var PAGE=48;
+  var cats=[],products=[],view=[],cur='all',shown=0,kw='',lang='en';
+  var UI={
+    en:{title:'Product Catalog',sub:'Live catalogue of export-ready products from China — new categories appear automatically.',
+        all:'All',search:'Search products',more:'Show more',empty:'Catalog is being updated.',
+        quote:'Request a quote →',mt:'Send an enquiry',ms:'Tell us the quantity and destination — we reply within one business day.',
+        name:'Your name',email:'Email',cancel:'Cancel',send:'Send',thanks:'Thanks! We will get back to you soon.'},
+    zh:{title:'产品目录',sub:'中国出口产品实时目录 —— 新增品类自动出现。',
+        all:'全部',search:'搜索产品',more:'显示更多',empty:'产品目录更新中。',
+        quote:'询价 →',mt:'发送询价',ms:'写下数量与目的地，我们会在一个工作日内回复。',
+        name:'你的称呼',email:'邮箱',cancel:'取消',send:'发送',thanks:'已收到！我们会尽快联系你。'}
+  };
+  function t(k){var d=UI[lang]||UI.en;return d[k]||UI.en[k];}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function specs(p){var o=[],a=p.specs||[];for(var i=0;i<a.length&&o.length<3;i++){var s=a[i]||{};var v=s.k?(s.k+': '+s.v):(s.v||'');if(v)o.push(v);}return o;}
+  function catName(id){for(var i=0;i<cats.length;i++){if(cats[i].id===id)return (cats[i].icon?cats[i].icon+' ':'')+(lang==='zh'?(cats[i].name_zh||cats[i].name_en):(cats[i].name_en||cats[i].id));}return id;}
+  function card(p,i){
+    var img=(p.images&&p.images[0])||'';
+    var ph=img?('<img loading="lazy" src="'+esc(img)+'" alt="'+esc(p.name_en||p.id)+'">'):('<span class="ic">'+esc(p.icon||'📦')+'</span>');
+    var sp=specs(p).map(function(s){return '<li>'+esc(s)+'</li>';}).join('');
+    var zh=(lang==='zh'&&p.name_zh)?('<div class="zh">'+esc(p.name_zh)+'</div>'):'';
+    var primary=(lang==='zh'&&p.name_zh)?p.name_zh:(p.name_en||p.id);
+    var secondary=(lang==='zh'&&p.name_en)?(''):'';
+    return '<article class="card"><div class="ph">'+ph+'</div><div class="bd">'
+      +'<div class="cat">'+esc(catName(p.category_id))+'</div>'
+      +'<div class="en">'+esc(primary)+'</div>'+zh+secondary
+      +(sp?('<ul>'+sp+'</ul>'):'')
+      +'<button class="q" data-i="'+i+'">'+esc(t('quote'))+'</button></div></article>';
+  }
+  function apply(){
+    view=[];
+    for(var i=0;i<products.length;i++){
+      var p=products[i];
+      if(cur!=='all'&&p.category_id!==cur) continue;
+      if(kw){var hay=((p.name_en||'')+' '+(p.name_zh||'')+' '+(p.keywords||'')).toLowerCase();if(hay.indexOf(kw)<0) continue;}
+      view.push({p:p,i:i});
+    }
+    shown=0;render();
+  }
+  function render(){
+    var html=[];
+    for(var n=shown;n<view.length&&n<shown+PAGE;n++){html.push(card(view[n].p,view[n].i));}
+    if(shown===0){document.getElementById('grid').innerHTML=html.join('');}
+    else{document.getElementById('grid').insertAdjacentHTML('beforeend',html.join(''));}
+    shown=Math.min(shown+PAGE,view.length);
+    document.getElementById('more').style.display=shown<view.length?'block':'none';
+    document.getElementById('empty').style.display=view.length?'none':'block';
+  }
+  function tabs(){
+    var h='<button class="tab'+(cur==='all'?' on':'')+'" data-cat="all">'+esc(t('all'))+'</button>';
+    cats.forEach(function(c){
+      var nm=(c.icon?c.icon+' ':'')+(lang==='zh'?(c.name_zh||c.name_en):(c.name_en||c.id));
+      h+='<button class="tab'+(cur===c.id?' on':'')+'" data-cat="'+esc(c.id)+'">'+esc(nm)+'</button>';
+    });
+    document.getElementById('tabs').innerHTML=h;
+  }
+  function labels(){
+    document.getElementById('hTitle').textContent=t('title');
+    document.getElementById('hSub').textContent=t('sub');
+    document.getElementById('q').setAttribute('placeholder',t('search'));
+    document.getElementById('more').textContent=t('more');
+    document.getElementById('empty').textContent=t('empty');
+    document.getElementById('mTitle').textContent=t('mt');
+    document.getElementById('mSub').textContent=t('ms');
+    document.getElementById('mn').setAttribute('placeholder',t('name'));
+    document.getElementById('me').setAttribute('placeholder',t('email'));
+    document.getElementById('mCancel').textContent=t('cancel');
+    document.getElementById('mSend').textContent=t('send');
+  }
+  var curP=null;
+  function openModal(p){
+    curP=p;
+    document.getElementById('mm').value='Inquiry: '+((p&&(p.name_en||p.name_zh))||'');
+    document.getElementById('modal').classList.add('on');
+  }
+  document.getElementById('grid').addEventListener('click',function(e){
+    var b=e.target.closest('.q');if(!b)return;openModal(products[parseInt(b.getAttribute('data-i'),10)]);
+  });
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var b=e.target.closest('.tab');if(!b)return;cur=b.getAttribute('data-cat');tabs();apply();
+  });
+  document.getElementById('q').addEventListener('input',function(e){kw=(e.target.value||'').trim().toLowerCase();apply();});
+  document.getElementById('more').addEventListener('click',render);
+  document.getElementById('mCancel').addEventListener('click',function(){document.getElementById('modal').classList.remove('on');});
+  document.getElementById('mSend').addEventListener('click',function(){
+    var n=document.getElementById('mn').value.trim(),em=document.getElementById('me').value.trim(),m=document.getElementById('mm').value.trim();
+    if(!n||!em||!m){alert('Name / Email / Message');return;}
+    fetch(API+'/contact',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({name:n,email:em,message:m,product:curP?(curP.name_en||curP.name_zh||''):'',product_id:curP?curP.id:'',device_id:'web:catalog'})
+    }).then(function(){document.getElementById('modal').classList.remove('on');
+      document.getElementById('mn').value='';document.getElementById('me').value='';alert(t('thanks'));})
+     .catch(function(){alert(t('thanks'));});
+  });
+  document.getElementById('langSel').addEventListener('change',function(e){
+    lang=e.target.value;document.documentElement.lang=lang;
+    document.documentElement.dir=(lang==='ar')?'rtl':'ltr';
+    labels();tabs();apply();
+  });
+  lang=document.documentElement.lang||'en';
+  if(['en','zh'].indexOf(lang)<0) lang='en';
+  document.getElementById('langSel').value=lang;
+  labels();
+  Promise.all([
+    fetch(API+'/categories').then(function(r){return r.json();}).catch(function(){return [];}),
+    fetch(API+'/search').then(function(r){return r.json();}).catch(function(){return [];})
+  ]).then(function(res){
+    cats=Array.isArray(res[0])?res[0]:[];products=Array.isArray(res[1])?res[1]:[];
+    tabs();apply();
+  }).catch(function(){document.getElementById('empty').style.display='block';});
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "95ba7a0b4234439eb18afbdc93a2f9ec"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
