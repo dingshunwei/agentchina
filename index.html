@@ -295,7 +295,11 @@
       <div class="eyebrow">🌏 GLOBAL FRIENDS</div>
       <select id="langSel" class="langsel"><option value="en">English</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option><option value="ru">Русский</option><option value="ar">العربية</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="hi">हिन्दी</option><option value="nl">Nederlands</option><option value="pl">Polski</option><option value="tr">Türkçe</option><option value="vi">Tiếng Việt</option><option value="th">ไทย</option><option value="id">Bahasa Indonesia</option><option value="sv">Svenska</option><option value="uk">Українська</option><option value="zh">中文</option></select>
       <h1>和世界做朋友，<br><span class="t">🐰</span> 从中国兔兔开始</h1>
-      <a class="prod" id="prodBearings" href="bearings.html">
+      <a class="prod" id="prodCategories" href="categories.html">
+    <span class="pi">🗂️</span>
+    <span class="pt"><b id="pcts">Product Categories</b><i>browse by category · auto-synced →</i></span>
+  </a>
+  <a class="prod" id="prodBearings" href="bearings.html">
         <span class="pi">🔩</span>
         <span class="pt"><b id="pbt">High-precision Bearings · Fasteners</b><i>P5 / P6 · P4 / P2 · 24 product lines →</i></span>
       </a>
@@ -496,6 +500,7 @@
   const PM={zh:'三相异步电机',en:'Three-phase Asynchronous Motors',fr:'Moteurs asynchrones triphasés',de:'Drehstrom-Asynchronmotoren',es:'Motores asíncronos trifásicos',it:'Motori asincroni trifase',pt:'Motores assíncronos trifásicos',ru:'Трёхфазные асинхронные двигатели',ja:'三相誘導電動機',ko:'3상 유도전동기',ar:'محركات حثية ثلاثية الطور',hi:'त्रि-चरण अतुल्यकालिक मोटर',nl:'Driefasige asynchrone motoren',pl:'Silniki asynchroniczne trójfazowe',tr:'Üç fazlı asenkron motorlar',vi:'Động cơ không đồng bộ ba pha',th:'มอเตอร์เหนี่ยวนำสามเฟส',id:'Motor induksi tiga fasa',sv:'Trefasiga asynkronmotorer',uk:'Трифазні асинхронні двигуни'};
 const PP={zh:'印制电路板 · PCB',en:'Printed Circuit Boards (PCB)',fr:'Circuits imprimés (PCB)',de:'Leiterplatten (PCB)',es:'Circuitos impresos (PCB)',it:'Circuiti stampati (PCB)',pt:'Circuitos impressos (PCB)',ru:'Печатные платы (PCB)',ar:'لوحات الدوائر المطبوعة (PCB)',ja:'プリント基板（PCB）',ko:'인쇄회로기판 (PCB)',hi:'प्रिंटेड सर्किट बोर्ड (PCB)',nl:'Printplaten (PCB)',pl:'Płytki drukowane (PCB)',tr:'Baskılı devre kartları (PCB)',vi:'Bo mạch in (PCB)',th:'แผงวงจรพิมพ์ (PCB)',id:'Papan sirkuit cetak (PCB)',sv:'Kretskort (PCB)',uk:'Друковані плати (PCB)'};
   const PLC={zh:'产品目录 · 全部分类',en:'Product Catalog · All Categories',fr:'Catalogue produits · toutes catégories',de:'Produktkatalog · alle Kategorien',es:'Catálogo de productos · todas las categorías',it:'Catalogo prodotti · tutte le categorie',pt:'Catálogo de produtos · todas as categorias',ru:'Каталог продукции · все категории',ar:'كتالوج المنتجات · جميع الفئات',ja:'製品カタログ · 全カテゴリ',ko:'제품 카탈로그 · 전체 카테고리',hi:'उत्पाद सूची · सभी श्रेणियाँ',nl:'Productcatalogus · alle categorieën',pl:'Katalog produktów · wszystkie kategorie',tr:'Ürün kataloğu · tüm kategoriler',vi:'Danh mục sản phẩm · tất cả danh mục',th:'แค็ตตาล็อกสินค้า · ทุกหมวดหมู่',id:'Katalog produk · semua kategori',sv:'Produktkatalog · alla kategorier',uk:'Каталог продукції · усі категорії'};
+  const PCATS={zh:'产品分类',en:'Product Categories',fr:'Catégories de produits',de:'Produktkategorien',es:'Categorías de productos',it:'Categorie di prodotti',pt:'Categorias de produtos',ru:'Категории продукции',ar:'فئات المنتجات',ja:'製品カテゴリ',ko:'제품 카테고리',hi:'उत्पाद श्रेणियाँ',nl:'Productcategorieën',pl:'Kategorie produktów',tr:'Ürün kategorileri',vi:'Danh mục sản phẩm',th:'หมวดหมู่สินค้า',id:'Kategori produk',sv:'Produktkategorier',uk:'Категорії продукції'};
   let lang='en';
 
   function setLang(l){
@@ -517,6 +522,7 @@ const PP={zh:'印制电路板 · PCB',en:'Printed Circuit Boards (PCB)',fr:'Circ
     const _pmt=document.getElementById('pmt'); if(_pmt) _pmt.textContent=PM[l]||PM.en;
   const _ppb=document.getElementById('ppb'); if(_ppb) _ppb.textContent=PP[l]||PP.en;
   const _pcat=document.getElementById('pcat'); if(_pcat) _pcat.textContent=PLC[l]||PLC.en;
+  const _pcats=document.getElementById('pcts'); if(_pcats) _pcats.textContent=PCATS[l]||PCATS.en;
     document.querySelector('.side-right strong').textContent=d.slogan;
     document.querySelector('.side-right .side-sub').textContent=d.sideSub;
     // 中心兔名称/标签国标化

@@ -222,11 +222,15 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:v
   if(['en','zh'].indexOf(lang)<0) lang='en';
   document.getElementById('langSel').value=lang;
   labels();
+  var PARS=new URLSearchParams(location.search);
+  var pcat=PARS.get('cat'), pq=PARS.get('q');
+  if(pq){kw=pq.toLowerCase();document.getElementById('q').value=pq;}
   Promise.all([
     fetch(API+'/categories').then(function(r){return r.json();}).catch(function(){return [];}),
     fetch(API+'/search').then(function(r){return r.json();}).catch(function(){return [];})
   ]).then(function(res){
     cats=Array.isArray(res[0])?res[0]:[];products=Array.isArray(res[1])?res[1]:[];
+    if(pcat && cats.some(function(c){return c.id===pcat;})) cur=pcat;
     tabs();apply();
   }).catch(function(){document.getElementById('empty').style.display='block';});
 })();
