@@ -446,14 +446,9 @@
   const SUPABASE_ANON='sb_publishable_XuZtEeFeJK6GtQC1RE3O6A_ZoVMcaO6';
   async function postLead(rec){
     try{
-      const resp=await fetch(SUPABASE_URL+'/rest/v1/messages',{
+      const resp=await fetch("https://api.agentchina.uk/web-contact",{
         method:'POST',
-        headers:{
-          'apikey':SUPABASE_ANON,
-          'Authorization':'Bearer '+SUPABASE_ANON,
-          'Content-Type':'application/json',
-          'Prefer':'return=minimal'
-        },
+        headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
           device_id:'website:'+rec.mode,
           text:(rec.mode==='ship'?'[出口詢盤] ':'[進口詢盤] ')+'['+(rec.name||'-')+' / '+(rec.email||'-')+'] '+rec.text,
